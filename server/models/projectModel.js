@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const projectSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true]
+        required: [true],
+        unique: true
     },
     createdAt: {
         type: Date,
@@ -42,6 +43,14 @@ const projectSchema = new mongoose.Schema({
 
     }
 )
+
+projectSchema.pre(/^find/, function (next) {
+    this.populate({
+        path: 'users',
+        select: '-__v'
+    })
+    next();
+})
 
 const Project = mongoose.model('Project', projectSchema);
 

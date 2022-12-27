@@ -29,7 +29,7 @@ exports.createProject = catchAsync(async (request, response, next) => {
 })
 
 exports.getProject = catchAsync(async (request, response, next) => {
-    const project = await Project.findById(request.params.id);
+    const project = await Project.findById(request.params.id)
 
     if (!project) {
         return next(new AppError('No bug found with that ID', 404));
