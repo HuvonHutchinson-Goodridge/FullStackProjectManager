@@ -29,12 +29,11 @@ const projectSchema = new mongoose.Schema({
     bugs: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Bug',
-        required: [true, "Project must have registered bugs"]
     }],
     users: [{
         type: mongoose.Schema.ObjectId,
         ref: 'User',
-        required: [true, "Project must have users on it"]
+        required: [true, "The project must have users"]
     }]
 },
     {

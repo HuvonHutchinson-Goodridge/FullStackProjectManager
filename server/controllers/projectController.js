@@ -18,7 +18,7 @@ exports.getAllProjects = catchAsync(async (request, response, next) => {
 })
 
 exports.createProject = catchAsync(async (request, response, next) => {
-    const newProject = await Bug.create(request.body);
+    const newProject = await Project.create(request.body);
 
     response.status(201).json({
         status: 'success',
