@@ -69,10 +69,10 @@ bugSchema.pre('save', function (next) {
 //    next();
 //})
 
-bugSchema.pre('aggregate', function (next) {
-    this.pipeline().unshift({ $match: { secretBug: {$ne: true}}})
-    next();
-})
+//bugSchema.pre('aggregate', function (next) {
+//    this.pipeline().unshift({ $match: { secretBug: {$ne: true}}})
+//    next();
+//})
 
 const Bug = mongoose.model('Bug', bugSchema);
 

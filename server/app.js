@@ -4,6 +4,7 @@ const app = express();
 const AppError = require('./utils/appError')
 const bugRouter = require('./routes/bugRoutes')
 const userRouter = require('./routes/userRoutes')
+const projectRouter = require('./routes/projectRoutes')
 const globalErrorHandler = require('./controllers/errorController')
 const rateLimit = require('express-rate-limit')
 const helmet = require('helmet');
@@ -54,6 +55,7 @@ app.use((request, response, next) => {
 //Routes
 app.use('/api/v1/bugs', bugRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/projects', projectRouter);
 app.all('*', function (request, response, next) {
     next(new AppError(`Cant find ${request.originalUrl}`, 404));
 })
