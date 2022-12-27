@@ -1,18 +1,6 @@
 const mongoose = require("mongoose")
-const slugify = require("slugify")
 
 const bugSchema = new mongoose.Schema({
-    user: {
-        type: String,
-        required: [true, "A bug must have a user"],
-        trim: true,
-        maxLength: [40, 'Your name is too long'],
-        minLength: [10, 'You name is too short']
-    },
-    userID: {
-        type: String,
-        required: [true, "A bug must have a userID"]
-    },
     bug: {
         type: String,
         unique: true,
@@ -22,7 +10,6 @@ const bugSchema = new mongoose.Schema({
     bugStatus: {
         type: String,
         default: "Pending",
-        trim: true
     },
     createdAt: {
         type: Date,
@@ -30,28 +17,27 @@ const bugSchema = new mongoose.Schema({
         select: false
     },
     assignedTo: {
-        type: String,
-        default: "Admin",
-        trim: true
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: [true, "The bug must be assigned to someone"]
+    },
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: [true, "The bug must belong to a user"],
     },
     project: {
-        type: String,
-        required: [true, "You must name the project with the bug"],
-        trim: true
-    },
-    numOfPeople: Number,
-    slug: String,
-    secretBug: {
-        type: Boolean,
-        default: false
+        type: mongoose.Schema.ObjectId,
+        ref: "Project",
+        required: [true, "The bug must belong to a project"]
     }
 })
 
 //DOCUMENT MIDDLEWARE: RUNS BEFORE .SAVE AND .CREATE()
-bugSchema.pre('save', function (next) {
-    this.slug = slugify(this.user, { lower: true })
-    next();
-})
+//bugSchema.pre('save', function (next) {
+//    this.slug = slugify(this.user, { lower: true })
+//    next();
+//})
 
 //bugSchema.post('save', function (doc, next) {
 //    console.log(doc)
@@ -73,6 +59,14 @@ bugSchema.pre('save', function (next) {
 //    this.pipeline().unshift({ $match: { secretBug: {$ne: true}}})
 //    next();
 //})
+
+//QUERY MIDDLEWARE
+
+bugSchema.pre(/^find/, function (next) {
+    this.populate({ path: 'user', select: '-email -role -__v' })
+    this.populate({ path: 'assignedTo', select: '-email -role -__v' })
+    next();
+})
 
 const Bug = mongoose.model('Bug', bugSchema);
 

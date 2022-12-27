@@ -27,10 +27,6 @@ const projectSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-    bugs: [{
-        type: mongoose.Schema.ObjectId,
-        ref: 'Bug',
-    }],
     users: [{
         type: mongoose.Schema.ObjectId,
         ref: 'User',

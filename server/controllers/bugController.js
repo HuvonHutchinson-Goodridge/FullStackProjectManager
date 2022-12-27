@@ -27,6 +27,10 @@ exports.getAllBugs = catchAsync(async (request, response, next) => {
 })
 
 exports.createBug = catchAsync(async (request, response, next) => {
+    //Allows for nested routes
+    if (!request.body.user) request.body.user = request.user.id;
+    if (!request.body.project) request.body.project = request.params.projectId
+
     const newBug = await Bug.create(request.body);
 
     response.status(201).json({
