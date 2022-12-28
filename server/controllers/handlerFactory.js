@@ -6,7 +6,7 @@ exports.deleteOne = Model => catchAsync(async (request, response, next) => {
     const document = await Model.findByIdAndDelete(request.params.id);
 
     if (!document) {
-        return next(new AppError('No bug found with that id'), 404)
+        return next(new AppError('No document found with that id'), 404)
     }
     response.status(204).json({
         status: 'success',
@@ -21,7 +21,7 @@ exports.updateOne = Model => catchAsync(async (request, response, next) => {
     })
 
     if (!document) {
-        return next(new AppError('No bug found with that id', 404))
+        return next(new AppError('No document found with that id', 404))
     }
 
     response.status(200).json({

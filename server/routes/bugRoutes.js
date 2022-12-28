@@ -4,11 +4,7 @@ const authController = require('./../controllers/authController');
 
 const router = express.Router({mergeParams: true});
 
-
-/*router.param('id', tourController.checkID)*/
-
-router.route('/best-bugs')
-    .get(bugController.aliasBestBugs, bugController.getAllBugs);
+router.use(authController.protect);
 
 router.route('/stats')
     .get(bugController.getBugStats);
@@ -20,6 +16,6 @@ router.route('/')
 router.route('/:id')
     .get(bugController.getBug)
     .patch(bugController.updateBug)
-    .delete(authController.protect, authController.restrictTo('admin'), bugController.deleteBug)
+    .delete( authController.restrictTo('admin'), bugController.deleteBug)
 
 module.exports = router;
