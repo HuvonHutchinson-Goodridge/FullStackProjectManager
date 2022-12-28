@@ -100,7 +100,6 @@ exports.restrictTo = (...roles) => {
  
     return (request, response, next) => {
         //roles = ['admin'] //role is now just user
-        console.log(request)
         if (!roles.includes(request.user.role)) {
             return next(new AppError('You do not have permission to perform this action', 403))
         }

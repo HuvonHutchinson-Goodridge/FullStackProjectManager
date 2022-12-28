@@ -1,6 +1,7 @@
 const AppError = require("./../utils/appError");
 const User = require("./../models/userModel")
 const catchAsync = require('./../utils/catchAsync');
+const factory = require('./handlerFactory');
 
 const filterObj = (obj, ...allowedFields) => {
     const newObj = Object.create(Object.prototype);
@@ -11,33 +12,6 @@ const filterObj = (obj, ...allowedFields) => {
     })
     return newObj;
 }
-
-exports.getAllUsers = catchAsync(async (request, response, next) => {
-
-    let users = await User.find();
-
-    response.status(200).json({
-        status: 'success',
-        results: users.length,
-        data: {
-            users
-        }
-    })
-})
-
-exports.createUser = catchAsync(async (request, response, next) => {
-    response.status(500).json({
-        status: 'error',
-        message: 'route not defined'
-    })
-})
-
-exports.getUser = catchAsync(async (request, response, next) => {
-    response.status(500).json({
-        status: 'error',
-        message: 'route not defined'
-    })
-})
 
 exports.updateMe = catchAsync(async (request, response, next) => {
     //Create an error if user tries to update the password
@@ -59,6 +33,11 @@ exports.updateMe = catchAsync(async (request, response, next) => {
     })
 })
 
+exports.getMe = (request, response, next) => {
+    request.params.id = request.user.id
+    next();
+}
+
 exports.deleteMe = catchAsync(async (request, response, next) => {
     await User.findByIdAndUpdate(request.user.id, { active: false });
     response.status(204).json({
@@ -67,16 +46,8 @@ exports.deleteMe = catchAsync(async (request, response, next) => {
     })
 })
 
-exports.updateUser = catchAsync(async (request, response, next) => {
-    response.status(500).json({
-        status: 'error',
-        message: 'route not defined'
-    })
-})
-
-exports.deleteUser = catchAsync(async (request, response, next) => {
-    response.status(500).json({
-        status: 'error',
-        message: 'route not defined'
-    })
-})
+//DO NOT UPDATE PASSWORDS WITH THIS
+exports.getAllUsers = factory.getAll(User);
+exports.getUser = factory.getOne(User)
+exports.updateUser = factory.updateOne(User);
+exports.deleteUser = factory.deleteOne(User);

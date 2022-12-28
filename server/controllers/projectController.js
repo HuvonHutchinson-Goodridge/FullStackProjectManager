@@ -2,75 +2,13 @@ const AppError = require("./../utils/appError");
 const Project = require("./../models/projectModel")
 const APIFeatures = require("./../utils/apiFeatures")
 const catchAsync = require('./../utils/catchAsync');
+const factory = require('./handlerFactory')
 
-exports.getAllProjects = catchAsync(async (request, response, next) => {
-    //execute query
-    const features = new APIFeatures(Project.find(), request.query).filter().sort().limitFields().paginate();
-    const projects = await features.query;
-
-    response.status(200).json({
-        status: 'success',
-        results: projects.length,
-        data: {
-            projects
-        }
-    })
-})
-
-exports.createProject = catchAsync(async (request, response, next) => {
-    const newProject = await Project.create(request.body);
-
-    response.status(201).json({
-        status: 'success',
-        data: {
-            project: newProject
-        }
-    })
-})
-
-exports.getProject = catchAsync(async (request, response, next) => {
-    const project = await Project.findById(request.params.id)
-
-    if (!project) {
-        return next(new AppError('No bug found with that ID', 404));
-    }
-    response.status(200).json({
-        status: 'success',
-        data: {
-            project
-        }
-    })
-})
-
-exports.updateProject = catchAsync(async (request, response, next) => {
-    const project = await Projects.findByIdAndUpdate(request.params.id, request.body, {
-        new: true,
-        runValidators: true
-    })
-
-    if (!bug) {
-        return next(new AppError('No bug found with that id', 404))
-    }
-
-    response.status(200).json({
-        status: 'success',
-        data: {
-            project
-        }
-    })
-})
-
-exports.deleteProject = catchAsync(async (request, response, next) => {
-    const project = await Project.findByIdAndDelete(request.params.id);
-
-    if (!project) {
-        return next(new AppError('No bug found with that id'), 404)
-    }
-    response.status(204).json({
-        status: 'success',
-        data: null
-    })
-})
+exports.getAllProjects = factory.getAll(Project);
+exports.getProject = factory.getOne(Project);
+exports.createProject = factory.createOne(Project);
+exports.updateProject = factory.updateOne(Project);
+exports.deleteProject = factory.deleteOne(Project);
 
 exports.getProjectStats = catchAsync(async (request, response, next) => {
     const stats = await Project.aggregate([

@@ -2,6 +2,7 @@ const AppError = require("./../utils/appError");
 const Bug = require("./../models/bugModel")
 const APIFeatures = require("./../utils/apiFeatures")
 const catchAsync = require('./../utils/catchAsync');
+const factory = require('./handlerFactory')
 
 exports.aliasBestBugs = (request, response, next) => {
     request.query.limit = '5';
@@ -10,80 +11,18 @@ exports.aliasBestBugs = (request, response, next) => {
     next();
 }
 
-
-
-exports.getAllBugs = catchAsync(async (request, response, next) => {
-    //execute query
-    const features = new APIFeatures(Bug.find(), request.query).filter().sort().limitFields().paginate();
-    const bugs = await features.query;
-
-    response.status(200).json({
-        status: 'success',
-        results: bugs.length,
-        data: {
-            bugs
-        }
-    })
-})
-
-exports.createBug = catchAsync(async (request, response, next) => {
+exports.setProjectUserIds = (request, response, next) => {
     //Allows for nested routes
     if (!request.body.user) request.body.user = request.user.id;
     if (!request.body.project) request.body.project = request.params.projectId
+    next();
+}
 
-    const newBug = await Bug.create(request.body);
-
-    response.status(201).json({
-        status: 'success',
-        data: {
-            bug: newBug
-        }
-    })
-})
-
-exports.getBug = catchAsync(async (request, response, next) => {
-    const bug = await Bug.findById(request.params.id);
-
-    if (!bug) {
-        return next(new AppError('No bug found with that ID', 404));
-    }
-    response.status(200).json({
-        status: 'success',
-        data: {
-            bug
-        }
-    })
-})
-
-exports.updateBug = catchAsync(async (request, response, next) => {
-    const bug = await Bug.findByIdAndUpdate(request.params.id, request.body, {
-        new: true,
-        runValidators: true
-    })
-
-    if (!bug) {
-        return next(new AppError('No bug found with that id', 404))
-    }
-
-    response.status(200).json({
-        status: 'success',
-        data: {
-            bug
-        }
-    })
-})
-
-exports.deleteBug = catchAsync(async (request, response, next) => {
-    const bug = await Bug.findByIdAndDelete(request.params.id);
-
-    if (!bug) {
-        return next(new AppError('No bug found with that id'), 404)
-    }
-    response.status(204).json({
-        status: 'success',
-        data: null
-    })
-})
+exports.getAllBugs = factory.getAll(Bug);
+exports.getBug = factory.getOne(Bug);
+exports.createBug = factory.createOne(Bug);
+exports.updateBug = factory.updateOne(Bug);
+exports.deleteBug = factory.deleteOne(Bug);
 
 exports.getBugStats = catchAsync(async (request, response, next) => {
     const stats = await Bug.aggregate([
