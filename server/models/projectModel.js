@@ -39,12 +39,6 @@ const projectSchema = new mongoose.Schema({
 
     }
 )
-//projectSchema.index({ slug: 1 });
-
-//projectSchema.pre('save', function (next) {
-//    this.slug = slugify(this.user, { lower: true })
-//    next();
-//})
 
 projectSchema.pre(/^find/, function (next) {
     this.populate({
@@ -53,8 +47,6 @@ projectSchema.pre(/^find/, function (next) {
     })
     next();
 })
-
-
 
 const Project = mongoose.model('Project', projectSchema);
 

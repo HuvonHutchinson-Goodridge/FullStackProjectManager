@@ -89,7 +89,6 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
         return JWTTimestamp < changedTimestamp
     }
 
-    //False means not changed
     return false;
 }
 
