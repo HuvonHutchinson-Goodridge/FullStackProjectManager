@@ -73,11 +73,20 @@ bugSchema.statics.calcData = async function (projectId) {
             }
         },
     ])
-    await Project.findByIdAndUpdate(projectId, {
-        bugsPending: stats[0].numOfBugs,
-        bugsResolved: stats[1].numOfBugs,
-        numOfBugs: stats[0].numOfBugs + stats[1].numOfBugs
-    })
+    if (stats.length > 0) {
+        await Project.findByIdAndUpdate(projectId, {
+            bugsPending: stats[0].numOfBugs,
+            bugsResolved: stats[1].numOfBugs,
+            numOfBugs: stats[0].numOfBugs + stats[1].numOfBugs
+        })
+    } else {
+        await Project.findByIdAndUpdate(projectId, {
+            bugsPending: 0,
+            bugsResolved: 0,
+            numOfBugs: 0
+        })
+    }
+    
 }
 
 bugSchema.post('save', function () {
