@@ -10,12 +10,12 @@ router.route('/stats')
     .get(bugController.getBugStats);
 
 router.route('/')
-    .get(authController.protect, bugController.getAllBugs)
-    .post(authController.protect, bugController.setProjectUserIds, bugController.createBug);
+    .get(bugController.getAllBugs)
+    .post(bugController.setProjectUserIds, bugController.createBug);
 
 router.route('/:id')
     .get(bugController.getBug)
     .patch(bugController.updateBug)
-    .delete( authController.restrictTo('admin'), bugController.deleteBug)
+    .delete(bugController.deleteBug)
 
 module.exports = router;

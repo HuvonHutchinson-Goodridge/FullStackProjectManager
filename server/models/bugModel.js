@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const Project = require('./projectModel');
 
 const bugSchema = new mongoose.Schema({
     bug: {
@@ -60,7 +61,38 @@ const bugSchema = new mongoose.Schema({
 //    next();
 //})
 
+bugSchema.statics.calcData = async function (projectId) {
+    const stats = await this.aggregate([
+        {
+            $match: { project: projectId }
+        },
+        {
+            $group: {
+                _id: "$bugStatus",
+                numOfBugs: {$sum: 1}
+            }
+        },
+    ])
+    await Project.findByIdAndUpdate(projectId, {
+        bugsPending: stats[0].numOfBugs,
+        bugsResolved: stats[1].numOfBugs,
+        numOfBugs: stats[0].numOfBugs + stats[1].numOfBugs
+    })
+}
+
+bugSchema.post('save', function () {
+    this.constructor.calcData(this.project)
+})
+
 //QUERY MIDDLEWARE
+bugSchema.pre(/^findOneAnd/, async function (next) {
+    this.r = await this.findOne().clone();
+    next();
+})
+
+bugSchema.post(/^findOneAnd/, async function () {
+    await this.r.constructor.calcData(this.r.project);
+})
 
 bugSchema.pre(/^find/, function (next) {
     this.populate({ path: 'user', select: '-email -role -__v' })

@@ -4,7 +4,7 @@ const APIFeatures = require('./../utils/apiFeatures')
 
 exports.deleteOne = Model => catchAsync(async (request, response, next) => {
     const document = await Model.findByIdAndDelete(request.params.id);
-
+    
     if (!document) {
         return next(new AppError('No document found with that id'), 404)
     }
