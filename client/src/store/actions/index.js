@@ -1,4 +1,5 @@
 import axios from 'axios';
+import API from './../../api/API'
 
 export const ADD = () => {
     return {
@@ -11,11 +12,7 @@ export const LogIn = (credentials, navigate, setFieldError, setSubmitting) => {
     //Make checks and get some data
     return async function (dispatch) {
         try {
-            const { data } = await axios.post("/api/v1/users/login", credentials, {
-                headers: {
-                    "Content-type": "application/json"
-                }
-            })
+            const data = await API.loginUser(credentials);
             if (data.status === "success") {
                 dispatch({
                     type: "LOG_IN",
