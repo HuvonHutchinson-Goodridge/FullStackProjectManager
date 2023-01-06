@@ -84,7 +84,7 @@ const Profile = ({ fetchPage }) => {
 
     useEffect(() => {
         fetchPage('CREATE ADMIN', 'INPUT ADMIN DETAILS')
-    }, [])
+    }, [fetchPage])
 
 
     return (
