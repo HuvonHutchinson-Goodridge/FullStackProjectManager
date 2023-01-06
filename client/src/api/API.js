@@ -1,5 +1,7 @@
 import authEndpoints from './endpoints/authEndpoints'
-
+import bugEndpoints from './endpoints/bugEndpoints'
+import projectEndpoints from './endpoints/projectEndpoints'
+import userEndpoints from './endpoints/userEndpoints'
 
 
 
@@ -7,5 +9,8 @@ import authEndpoints from './endpoints/authEndpoints'
 
 
 export default {
-    ...authEndpoints
+    ...authEndpoints,
+    ...bugEndpoints,
+    ...projectEndpoints,
+    ...userEndpoints
 }

@@ -6,14 +6,12 @@ import axios from 'axios';
  * @param setSubmitting responsebile for verifying if fields are to be submitted
  */
 
-export const register = async (credentials, setFieldError, setSubmitting) => {
-
+export const register = async (credentials) => {
     const response = await axios.post("/api/v1/users/signup", credentials, {
         headers: {
             "Content-type": "application/json"
         }
     })
-
     return response
 }
 
