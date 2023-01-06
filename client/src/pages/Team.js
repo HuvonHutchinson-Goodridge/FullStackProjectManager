@@ -87,7 +87,7 @@ const Team = ({fetchPage}) => {
         }
         fetchPage("TEAM", "Here is your team");
         getUserData();
-    }, [])
+    }, [fetchPage])
 
     
     return (
