@@ -36,7 +36,7 @@ const Team = ({fetchPage}) => {
             headerName: 'Role',
             align: "left",
             headerAlign: "left",
-            type: 'String',
+            type: 'string',
             flex: 1,
             renderCell: ({ row: { role } }) => {
                 return (
@@ -76,19 +76,15 @@ const Team = ({fetchPage}) => {
     const [users, setUsers] = useState([])
     useEffect(() => {
         const getUserData = async () => {
-            try {
+            
                 const { data } = await axios.get('/api/v1/users', {
                     headers: {
                         'Content-type': 'application/json'
                     }
                 })
-                setUsers(data.data.users)
-            } catch (err) {
-                console.log(err);
-            }
-
+                setUsers(data.data.data)
+            
         }
-        
         fetchPage("TEAM", "Here is your team");
         getUserData();
     }, [])
@@ -124,8 +120,6 @@ const Team = ({fetchPage}) => {
                 getRowId={(row) => row._id}
                 rows={users}
                 columns={columns}
-                pageSize={8}
-                rowsPerPageOptions={[5]}
                 disableSelectionOnClick
                 experimentalFeatures={{ newEditingApi: true }}
                 sx={{ backgroundColor: colors.primary[400] }}
