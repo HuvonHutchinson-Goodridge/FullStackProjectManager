@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchPage } from "./../store/actions"
 import { connect } from "react-redux"
-import { ProjectCard } from "./../components/ProjectCard"
+import ProjectCard from "./../components/ProjectCard"
 import API from './../api/API'
 const Projects = ({ fetchPage }) => {
     const [projects, setProjects] = useState([])
@@ -18,8 +18,13 @@ const Projects = ({ fetchPage }) => {
         fetchPage('Projects', "Here are your projects")
         getProjectData()
     }, [fetchPage])
+
+    const projectArray = projects.map((project) => {
+        return <ProjectCard key={project.name} name={project.name} description={project.description}/>
+    })
+
     return (<div>
-        {projects[0].name}
+        {projectArray}
     </div>)
 }
 
