@@ -23,12 +23,12 @@ export const updateOne = (resource) => async (id, changes) => {
 }
 
 export const createOne = (resource) => async (values) => {
-    const { data } = await axios.post(`/api/v1/${resource}`, values);
+    const { data } = await axios.post(`/api/v1/${resource}`, values, headers);
     return data;
 }
 
 export const deleteOne = (resource) => async (id) => {
-    const data = await axios.delete(`/api/v1/${resource}/${id}`)
+    const data = await axios.delete(`/api/v1/${resource}/${id}`, headers)
     return data;
 }
 
