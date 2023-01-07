@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios'
+import API from './../api/API'
 import { useEffect } from 'react'
 import { fetchPage } from "./../store/actions"
 import { connect } from 'react-redux'
@@ -19,25 +19,14 @@ const validationSchema = Yup.object({
     confirmPassword: Yup.string().required("Required").oneOf([Yup.ref("password"), "Passwords must match"]),
 })
 
-const register = async (credentials, setFieldError, setSubmitting) => {
+const register = async (credentials) => {
     try {
-        const response = await axios.post("/api/v1/users/signup", credentials, {
-            headers: {
-                "Content-type": "application/json"
-            }
-        })
+        const response = await API.register(credentials)
         if (response.data.status === "success") {
             alert("The user has been created")
         }
-        setSubmitting(true);
     } catch (err) {
         console.log(err.response.data.message);
-        setFieldError("firstName", err.response.data.message)
-        setFieldError("lastName", err.response.data.message)
-        setFieldError("email", err.response.data.message)
-        setFieldError("password", err.response.data.message)
-        setFieldError("confirmPassword", err.response.data.message)
-        setSubmitting(false);
     }
 }
 
