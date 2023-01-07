@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import  ProjectImage  from './../assets/projectImages/HiRes-17.jpg'
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -10,6 +9,7 @@ import Collapse from '@mui/material/Collapse';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton from '@mui/material/IconButton';
+import Grid from '@mui/material/Grid'
 
 
 
@@ -26,26 +26,27 @@ const ExpandMore = styled((props) => {
 
 
 const ProjectCard = (props) => {
-        const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState(false);
 
-        const handleExpandClick = () => {
-            setExpanded(!expanded);
-        };
 
-        return (
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+    };
+
+    return (
+        <Grid item md={3}>
             <Card sx={{ maxWidth: 345 }}>
                 <CardHeader
-                    title={props.name}
-                   subheader="September 14, 2016"              />
+                    title={props.name}                />
                 <CardMedia
                     component="img"
                     height="194"
-                    image={ProjectImage}
+                    image={require(`../assets/projectImages/${props.image}`)}
                     alt="Project Image"
                 />
                 <CardContent>
-                    <Typography variant="body2" color="text.secondary">
-                        Hello everyone
+                    <Typography variant="h6" color="text.secondary">
+                        {props.name}
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
@@ -60,23 +61,16 @@ const ProjectCard = (props) => {
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <Typography paragraph> Hello everyone</Typography>
+                        <Typography paragraph> Description: </Typography>
                         <Typography paragraph>
                             {props.description}
                         </Typography>
-                        <Typography paragraph>
-                            {props.description}
-                        </Typography>
-                        <Typography paragraph>
-                            {props.description}
-                        </Typography>
-                        <Typography>
-                            {props.description}
-                        </Typography>
+
                     </CardContent>
                 </Collapse>
             </Card>
-        );
-    }
+        </Grid>
+    );
+}
 
 export default ProjectCard;
