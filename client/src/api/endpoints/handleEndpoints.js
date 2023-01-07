@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 const headers = {
     headers: {
         "Content-type": "application/json"
