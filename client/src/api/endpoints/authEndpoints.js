@@ -2,8 +2,6 @@ import axios from 'axios';
 /**
  * Registers a new user in the database
  * @param credentials contains email, firstName,lastName, password, confirmPassword
- * @param setFieldError responsible for setting errors on incorrect fields
- * @param setSubmitting responsebile for verifying if fields are to be submitted
  */
 
 export const register = async (credentials) => {
