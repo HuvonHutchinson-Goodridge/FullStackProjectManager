@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
+import  ProjectImage  from './../assets/projectImages/HiRes-17.jpg'
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -8,6 +9,8 @@ import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import IconButton from '@mui/material/IconButton';
+
 
 
 const ExpandMore = styled((props) => {
@@ -32,24 +35,17 @@ const ProjectCard = (props) => {
         return (
             <Card sx={{ maxWidth: 345 }}>
                 <CardHeader
-                    
-                    action={
-                        <IconButton aria-label="settings">
-                            <MoreVertIcon />
-                        </IconButton>
-                    }
-                    title="props.name"
-                    /*subheader="September 14, 2016"*/
-                />
+                    title={props.name}
+                   subheader="September 14, 2016"              />
                 <CardMedia
                     component="img"
                     height="194"
-                    image="/static/images/cards/paella.jpg"
-                    alt="Paella dish"
+                    image={ProjectImage}
+                    alt="Project Image"
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.secondary">
-                        {props.description}
+                        Hello everyone
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
@@ -64,22 +60,23 @@ const ProjectCard = (props) => {
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <Typography paragraph>Method:</Typography>
+                        <Typography paragraph> Hello everyone</Typography>
                         <Typography paragraph>
-                            
+                            {props.description}
                         </Typography>
                         <Typography paragraph>
-                            
+                            {props.description}
                         </Typography>
                         <Typography paragraph>
-                            
+                            {props.description}
                         </Typography>
                         <Typography>
-
+                            {props.description}
                         </Typography>
                     </CardContent>
                 </Collapse>
             </Card>
         );
     }
-}
+
+export default ProjectCard;
