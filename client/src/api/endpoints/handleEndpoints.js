@@ -12,8 +12,12 @@ const headers = {
  * @param changes contains the data that will update a resource
  */
 
-export const getAll = (resource) => async () => {
-    const { data } = await axios.get(`/api/v1/${resource}`, headers)
+export const getAll = (resource) => async (id, auxiliary) => {
+    let endpoint = (id && auxiliary) ?
+        `/api/v1/${resource}/${id}/${auxiliary}`
+        : `/api/v1/${resource}`;
+
+    const { data } = await axios.get(endpoint, headers)
     return data;
 }
 
