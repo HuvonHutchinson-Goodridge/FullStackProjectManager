@@ -4,10 +4,6 @@ import projectEndpoints from './endpoints/projectEndpoints'
 import userEndpoints from './endpoints/userEndpoints'
 
 
-
-
-
-
 export default {
     ...authEndpoints,
     ...bugEndpoints,
