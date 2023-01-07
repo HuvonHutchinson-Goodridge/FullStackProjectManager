@@ -5,6 +5,12 @@ const headers = {
         "Content-type": "application/json"
     }
 }
+/**
+ * Generalizable functions for api resources
+ * @param resource contains the resource you are querying for
+ * @param id contains the id of a specific resource
+ * @param changes contains the data that will update a resource
+ */
 
 export const getAll = (resource) => async () => {
     const { data } = await axios.get(`/api/v1/${resource}`, headers)
