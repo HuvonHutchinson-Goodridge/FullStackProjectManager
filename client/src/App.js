@@ -35,7 +35,9 @@ const App = () => {
                             <Route path="calendar" element={<Calendar />} />
                             <Route path="piechart" element={<PieChart />} />
                             <Route path="frontpage" element={<FrontPage />} />
-                            <Route path="projects" element={<Projects/>}/>
+                            <Route path="projects" element={<Projects />}>
+                                <Route path=""/>
+                            </Route>
                         </Route>
                     </Routes>
 
