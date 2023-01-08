@@ -77,7 +77,7 @@ const Profile = ({ fetchPage }) => {
 
 
     return (
-        <Box ml="15px">
+        <Grid item md={12} ml="15px">
             <Formik
                 onSubmit={(values, { setSubmitting, setFieldError }) => {
                     console.log(setFieldError);
@@ -149,7 +149,7 @@ const Profile = ({ fetchPage }) => {
                         </Grid>
                     </Form>)}
             </Formik>
-        </Box>)
+        </Grid>)
 }
 
 export default connect(null, { fetchPage })(Profile);
