@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { useTheme } from "@mui/material"
 import { tokens } from "./../theme"
@@ -91,7 +91,7 @@ const Team = ({fetchPage}) => {
 
     
     return (
-        <Box m="40px 0 0 0" p="15px" sx={{
+        <Grid item m="40px 0 0 0" p="15px" sx={{
             height: "75vh", width: '100%', "& .MuiDataGrid-root": {
                 border: "none",
             },
@@ -124,7 +124,7 @@ const Team = ({fetchPage}) => {
                 experimentalFeatures={{ newEditingApi: true }}
                 sx={{ backgroundColor: colors.primary[400] }}
             />
-        </Box>
+        </Grid>
     );
 }
 
