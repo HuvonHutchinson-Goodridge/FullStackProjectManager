@@ -7,11 +7,11 @@ import { Outlet } from 'react-router-dom'
 import { tokens } from "./../theme"
 import { connect } from 'react-redux'
 
-const PageLayout = ({headerTitle, headerSubtitle}) => {
+const PageLayout = ({ headerTitle, headerSubtitle }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     return (
-        <Grid container wrap="nowrap" spacing={1} height={"101vh"} backgroundColor={colors.primary[500]} justifyContent="center">
+        <Grid container wrap="nowrap" overflow="auto" height={"100vh"} backgroundColor={colors.primary[500]} justifyContent="center">
             <Grid item width="240px">
                 <SideBar />
             </Grid>
