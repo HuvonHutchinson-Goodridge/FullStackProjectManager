@@ -34,13 +34,14 @@ const ProjectCard = (props) => {
     };
 
     return (
-        <Grid item md={3}>
-            <Card sx={{ maxWidth: 345 }}>
+        <Grid item md={4}>
+            <Card sx={{  minWidth: 200 }}>
                 <CardHeader
-                    title={props.name}                />
+                    title={props.name}                    sx={{display: "flex", flexWrap: "nowrap"}}                />
                 <CardMedia
                     component="img"
                     height="194"
+                    width="194"
                     image={require(`../assets/projectImages/${props.image}`)}
                     alt="Project Image"
                 />
