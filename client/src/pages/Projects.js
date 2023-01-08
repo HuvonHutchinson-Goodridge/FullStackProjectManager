@@ -31,7 +31,7 @@ const Projects = ({ fetchPage }) => {
 
     return (
 
-        <Grid item container nowrap spacing={1} md={12} ml="5px">
+        <Grid item container overflow="auto" nowrap spacing={1} md={12} ml="5px">
             {projectArray}
         </Grid>
 
