@@ -9,8 +9,11 @@ import Collapse from '@mui/material/Collapse';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid'
-
+import { useTheme } from "@mui/material"
+import { tokens } from './../theme'
+import { Link as RouterLink } from 'react-router-dom'
 
 
 const ExpandMore = styled((props) => {
@@ -26,6 +29,8 @@ const ExpandMore = styled((props) => {
 
 
 const ProjectCard = (props) => {
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
     const [expanded, setExpanded] = useState(false);
 
 
@@ -35,9 +40,11 @@ const ProjectCard = (props) => {
 
     return (
         <Grid item md={4}>
-            <Card sx={{  minWidth: 200 }}>
+            <Card sx={{ width: 280 }}>
                 <CardHeader
-                    title={props.name}                    sx={{display: "flex", flexWrap: "nowrap"}}                />
+                    title={props.name}                    sx={{
+                        display: "flex", flexWrap: "nowrap",                        "& .MuiTypography-root": { whiteSpace: "nowrap" }
+                    }}                />
                 <CardMedia
                     component="img"
                     height="194"
@@ -51,6 +58,9 @@ const ProjectCard = (props) => {
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
+                    <Button color="secondary" variant="contained" component={RouterLink} to={`${props.name}/details`}>
+                        Details
+                    </Button>
                     <ExpandMore
                         expand={expanded}
                         onClick={handleExpandClick}
@@ -59,6 +69,7 @@ const ProjectCard = (props) => {
                     >
                         <ExpandMoreIcon />
                     </ExpandMore>
+
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
