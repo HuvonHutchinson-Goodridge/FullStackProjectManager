@@ -37,7 +37,6 @@ export const LogIn = (credentials, navigate, setFieldError, setSubmitting) => {
 }
 
 export const selectProject = (details) => {
-    console.log(details)
     const { name,
         image,
         numOfBugs, 
