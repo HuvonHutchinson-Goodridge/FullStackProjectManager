@@ -42,7 +42,6 @@ const Profile = ({ fetchPage }) => {
     }
 
     const InputBar = ({ md, ...props }) => {
-        const [field, meta, helpers] = useField(props);
         
         return (
             <Grid item md={md} spacing="5px" mb={5}>
@@ -51,7 +50,6 @@ const Profile = ({ fetchPage }) => {
                         {props.icon}
                     </IconButton>
                     <TextField
-                        {...field}
                         {...props}
                         fullWidth
                         id={props.id}
@@ -64,9 +62,6 @@ const Profile = ({ fetchPage }) => {
                         onChange={props.onChange}                        error={props.error}
                     />
                 </Box>
-                <Box>
-                    {props.error && props.helperText}
-                    </Box>
             </Grid>
         )
     }
