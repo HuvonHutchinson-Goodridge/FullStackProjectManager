@@ -17,6 +17,7 @@ export const LogIn = (credentials, navigate, setFieldError, setSubmitting) => {
                 dispatch({
                     type: "LOG_IN",
                     payload: {
+                        id: data.data.user._id,
                         firstName: data.data.user.firstName,
                         lastName: data.data.user.lastName,
                         email: data.data.user.email,

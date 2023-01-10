@@ -5,12 +5,13 @@ export const getProject = handleEndpoints.getOne('projects')
 export const updateProject = handleEndpoints.updateOne('projects');
 export const createProject = handleEndpoints.createOne('projects');
 export const deleteProject = handleEndpoints.deleteOne('projects')
-
+export const createBugOnProject = handleEndpoints.createOne('projects')
 
 export default {
     getAllProjects,
     getProject,
     updateProject,
     createProject,
+    createBugOnProject,
     deleteProject
 }

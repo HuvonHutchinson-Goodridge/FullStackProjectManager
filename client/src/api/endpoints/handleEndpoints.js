@@ -31,8 +31,13 @@ export const updateOne = (resource) => async (id, changes) => {
     return data;
 }
 
-export const createOne = (resource) => async (values) => {
-    const { data } = await axios.post(`/api/v1/${resource}`, values, headers);
+export const createOne = (resource) => async (values, auxiliary) => {
+    console.log(values)
+    let endpoint = (values.project && auxiliary) ?
+        `/api/v1/${resource}/${values.project}/${auxiliary}`
+        : `/api/v1/${resource}`;
+    
+    const { data } = await axios.post(endpoint, values, headers);
     return data;
 }
 
