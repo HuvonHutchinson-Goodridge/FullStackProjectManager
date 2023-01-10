@@ -76,15 +76,18 @@ bugSchema.statics.calcData = async function (projectId) {
     ])
 
     let numOfBugs;
+    console.log(stats)
     if (stats.length > 0) {
+
         if (stats.length === 1) {
             numOfBugs = stats[0].numOfBugs;
         } else if (stats.length === 2) {
             
             numOfBugs = stats[0].numOfBugs + stats[1].numOfBugs;
         }
+        console.log(numOfBugs)
         await Project.findByIdAndUpdate(projectId, {
-            bugsPending: stats[0] === undefined ? 0 : stats[1].numOfBugs,
+            bugsPending: stats[0] === undefined ? 0 : stats[0].numOfBugs,
             bugsResolved: stats[1] === undefined ? 0 : stats[1].numOfBugs,
             numOfBugs,
         })
