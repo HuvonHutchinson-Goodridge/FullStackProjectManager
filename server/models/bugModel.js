@@ -62,6 +62,7 @@ const bugSchema = new mongoose.Schema({
 //})
 
 bugSchema.statics.calcData = async function (projectId) {
+    console.log(projectId)
     const stats = await this.aggregate([
         {
             $match: { project: projectId }
@@ -73,11 +74,19 @@ bugSchema.statics.calcData = async function (projectId) {
             }
         },
     ])
+
+    let numOfBugs;
     if (stats.length > 0) {
+        if (stats.length === 1) {
+            numOfBugs = stats[0].numOfBugs;
+        } else if (stats.length === 2) {
+            
+            numOfBugs = stats[0].numOfBugs + stats[1].numOfBugs;
+        }
         await Project.findByIdAndUpdate(projectId, {
-            bugsPending: stats[0].numOfBugs,
-            bugsResolved: stats[1].numOfBugs,
-            numOfBugs: stats[0].numOfBugs + stats[1].numOfBugs
+            bugsPending: stats[0] === undefined ? 0 : stats[1].numOfBugs,
+            bugsResolved: stats[1] === undefined ? 0 : stats[1].numOfBugs,
+            numOfBugs,
         })
     } else {
         await Project.findByIdAndUpdate(projectId, {
