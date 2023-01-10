@@ -35,6 +35,32 @@ export const LogIn = (credentials, navigate, setFieldError, setSubmitting) => {
     }
 }
 
+export const selectProject = (details) => {
+    console.log(details)
+    const { name,
+        image,
+        numOfBugs, 
+        numOfUsers, 
+        bugsPending, 
+        bugsResolved, 
+        description, 
+        id } = details
+
+    return {
+        type: "PROJECT_SELECTED",
+        payload: {
+            name,
+            numOfUsers,
+            numOfBugs,
+            bugsPending,
+            bugsResolved,
+            description,
+            image,
+            id
+        }
+    }
+}
+
 export const LogOut = () => {
     return {
         type: "LOG_OUT"

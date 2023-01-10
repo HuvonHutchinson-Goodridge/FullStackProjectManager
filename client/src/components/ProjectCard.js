@@ -14,6 +14,8 @@ import Grid from '@mui/material/Grid'
 import { useTheme } from "@mui/material"
 import { tokens } from './../theme'
 import { Link as RouterLink } from 'react-router-dom'
+import { selectProject } from './../store/actions'
+import { connect } from 'react-redux'
 
 
 const ExpandMore = styled((props) => {
@@ -28,15 +30,17 @@ const ExpandMore = styled((props) => {
 }));
 
 
-const ProjectCard = (props) => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
+const ProjectCard = ({selectProject, ...props}) => {
     const [expanded, setExpanded] = useState(false);
 
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+
+    const chooseProject = () => {
+        selectProject(props.project)
+    }
 
     return (
         <Grid item md={4}>
@@ -58,7 +62,12 @@ const ProjectCard = (props) => {
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
-                    <Button color="secondary" variant="contained" component={RouterLink} to={`${props.name}/details`}>
+                    <Button color="secondary"
+                        variant="contained"
+                        component={RouterLink}
+                        to={"details"}
+                        onClick={chooseProject}
+                    >
                         Details
                     </Button>
                     <ExpandMore
@@ -85,4 +94,4 @@ const ProjectCard = (props) => {
     );
 }
 
-export default ProjectCard;
+export default connect(null, { selectProject })(ProjectCard);

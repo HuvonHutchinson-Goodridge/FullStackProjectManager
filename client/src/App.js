@@ -9,6 +9,7 @@ import Calendar from './pages/Calendar'
 import PieChart from './pages/PieChart'
 import FrontPage from './pages/FrontPage'
 import Projects from './pages/Projects'
+import Bugs from './pages/Bugs'
 import {
     BrowserRouter,
     Routes,
@@ -35,9 +36,8 @@ const App = () => {
                             <Route path="calendar" element={<Calendar />} />
                             <Route path="piechart" element={<PieChart />} />
                             <Route path="frontpage" element={<FrontPage />} />
-                            <Route path="projects" element={<Projects />}>
-                                <Route path=""/>
-                            </Route>
+                            <Route path="projects" element={<Projects />}/>
+                            <Route path="projects/details" element={<Bugs />} />
                         </Route>
                     </Routes>
 

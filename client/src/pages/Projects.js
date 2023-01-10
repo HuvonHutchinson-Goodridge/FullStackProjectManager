@@ -12,6 +12,7 @@ const Projects = ({ fetchPage }) => {
         const getProjectData = async () => {
             try {
                 const { data } = await API.getAllProjects()
+                console.log(data.data)
                 setProjects(data.data)
             } catch (err) {
                 console.log(err);
@@ -23,6 +24,7 @@ const Projects = ({ fetchPage }) => {
 
     const projectArray = projects.map((project) => {
         return <ProjectCard
+            project={project}
             key={project.name}
             name={project.name}
             description={project.description}

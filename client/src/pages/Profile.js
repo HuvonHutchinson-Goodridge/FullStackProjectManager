@@ -79,9 +79,8 @@ const Profile = ({ fetchPage }) => {
     return (
         <Grid item md={12} ml="15px">
             <Formik
-                onSubmit={(values, { setSubmitting, setFieldError }) => {
-                    console.log(setFieldError);
-                    register(values, setFieldError, setSubmitting)
+                onSubmit={(values) => {
+                    register(values)
                 }}
                 initialValues={initialValues}
                 validationSchema={validationSchema}>
