@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 //Formik
-import { Formik, Form, useField } from 'formik'
+import { Formik, Form} from 'formik'
 
 //Files
 import { tokens } from "./../theme"
@@ -87,7 +87,6 @@ const Bugs = ({ fetchPage, ...props }) => {
         const getAllBugsOnProject = async () => {
             try {
                 const { data } = await API.getAllProjects(props.projectID, 'bugs')
-                console.log(data.data);
                 setBugs(data.data)
             } catch (err) {
                 console.log(err)
@@ -100,8 +99,8 @@ const Bugs = ({ fetchPage, ...props }) => {
     const logBug = async (values) => {
         
         try {
-            const response = await API.createBugOnProject(values, 'bugs')
-            console.log(response);
+            const { data } = await API.createBugOnProject(values, 'bugs')
+            setBugs([...bugs, data.data])
         } catch (err) {
             console.log(err);
         }
@@ -113,6 +112,7 @@ const Bugs = ({ fetchPage, ...props }) => {
             <Formik
                 onSubmit={(values) => {
                     logBug(values)
+                    values = initialValues
                 }}
                 initialValues={initialValues}
                 >
