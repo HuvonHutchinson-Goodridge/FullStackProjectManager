@@ -168,8 +168,8 @@ const Bugs = ({ fetchPage, ...props }) => {
     );
 }
 
-const mapStateToProps = ({ projectReducer, authReducer }) => {
-    const { name} = projectReducer;
+const mapStateToProps = ({ selectedProjectReducer, authReducer }) => {
+    const { name} = selectedProjectReducer;
     const { id } = authReducer;
     return { currentUser: id, name, projectID: projectReducer.id }
 }
