@@ -43,12 +43,15 @@ const ProjectCard = ({selectProject, ...props}) => {
     }
 
     return (
-        <Grid item md={4}>
+        <Grid item container justifyContent="center" md={3}>
             <Card sx={{ width: 280 }}>
                 <CardHeader
-                    title={props.name}                    sx={{
-                        display: "flex", flexWrap: "nowrap",                        "& .MuiTypography-root": { whiteSpace: "nowrap" }
-                    }}                />
+                    title={props.name}
+                    sx={{
+                        display: "flex", flexWrap: "nowrap",
+                        "& .MuiTypography-root": { whiteSpace: "nowrap" }
+                    }}
+                />
                 <CardMedia
                     component="img"
                     height="194"
