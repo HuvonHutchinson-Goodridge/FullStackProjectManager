@@ -15,10 +15,10 @@ const FrontPage = ({ fetchPage }) => {
 
     useEffect(() => {
         fetchPage("DASHBOARD", "Welcome to your dashboard")
-    }, [])
+    }, [fetchPage])
     return (
         <Box ml="20px">
-            <Grid container alignItems="flex" spacing={1} md={12} height="75vh">
+            <Grid container alignItems="flex" spacing={1} height="75vh">
                 <Grid item md={12}>
                     <Button
                         sx={{
@@ -33,7 +33,7 @@ const FrontPage = ({ fetchPage }) => {
                         Download Repositories
                     </Button>
                 </Grid>
-                <Grid container mr="15px" overflow="none" md={12}>
+                <Grid container mr="15px" overflow="none">
                     <Grid item md={4} backgroundColor={colors.primary[400]} alignItems="center" justifyContent="center">
                         <StatBox title="123412" subtitle="Projects" progress="0.75" increase="+14%" icon={
                             <EmailOutlinedIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />
