@@ -62,7 +62,6 @@ const bugSchema = new mongoose.Schema({
 //})
 
 bugSchema.statics.calcData = async function (projectId) {
-    console.log(projectId)
     const stats = await this.aggregate([
         {
             $match: { project: projectId }
@@ -100,6 +99,12 @@ bugSchema.statics.calcData = async function (projectId) {
     }
     
 }
+
+//Document Middleware
+bugSchema.pre('save', function (next) {
+    this.populate({path: 'assignedTo'})
+    next();
+})
 
 bugSchema.post('save', function () {
     this.constructor.calcData(this.project)
