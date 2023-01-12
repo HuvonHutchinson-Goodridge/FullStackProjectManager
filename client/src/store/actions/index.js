@@ -1,4 +1,3 @@
-import axios from 'axios';
 import API from './../../api/API'
 
 export const ADD = () => {
@@ -67,35 +66,33 @@ export const LogOut = () => {
     }
 }
 
-export const fetchUserData = ({ email, password }) => {
-
-    return async function (dispatch, getState) {
-        try {
-            const { data } = await axios.get("/api/v1/users", { email, password },
-                {
-                    headers: { "Content-type": "application/json" }
-                }
-            )
-            console.log(data);
-            if (data.status === "success") {
-                dispatch({
-                    type: "USER_DATA",
-                    payload: {}
-                })
-            }
-        } catch (err) {
-            console.log(err);
-            throw Error(err.response.data.message);
-        }
-    }
-}
-
 export const fetchPage = (title, subtitle) => {
     return {
         type: "PAGE",
         payload: {
             title,
             subtitle
+        }
+    }
+}
+
+export const loadData = () => {
+    return async function (dispatch, getState) {
+        try {
+            const projects = await API.getAllProjects();
+            const users = await API.getAllUsers();
+
+            dispatch({
+                type: "PROJECT",
+                payload: projects.data.data
+            })
+            dispatch({
+                type: "USERS",
+                payload: users.data.data
+            })
+            
+        } catch (err) {
+            console.log(err);
         }
     }
 }
