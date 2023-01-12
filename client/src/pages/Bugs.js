@@ -11,9 +11,8 @@ import { Formik, Form} from 'formik'
 //Files
 import { tokens } from "./../theme"
 import { fetchPage } from './../store/actions'
+import InputBar from './../components/utils/InputBar'
 import API from './../api/API'
-
-
 
 const Bugs = ({ fetchPage, ...props }) => {
     const [bugs, setBugs] = useState([])
@@ -26,31 +25,6 @@ const Bugs = ({ fetchPage, ...props }) => {
         project: props.projectID
     }
 
-    const InputBar = ({ md, ...props }) => {
-
-        return (
-            <Grid item md={md} ml="15px">
-                <Box display="flex" backgroundColor={colors.primary[400]} borderRadius="3px">
-                    <TextField
-                        {...props}
-                        fullWidth
-                        id={props.id}
-                        onBlur={props.onBlur}
-                        name={props.name}
-                        label={props.label}
-                        value={props.value}
-                        variant="filled"
-                        type="text"
-                        onChange={props.onChange}
-                        error={props.error}
-                    />
-                </Box>
-                <Box>
-                    {props.error && props.helperText}
-                </Box>
-            </Grid>
-        )
-    }
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 100 },
@@ -112,7 +86,6 @@ const Bugs = ({ fetchPage, ...props }) => {
             <Formik
                 onSubmit={(values) => {
                     logBug(values)
-                    values = initialValues
                 }}
                 initialValues={initialValues}
                 >
