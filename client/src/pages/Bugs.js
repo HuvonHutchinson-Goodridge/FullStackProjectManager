@@ -171,7 +171,7 @@ const Bugs = ({ fetchPage, ...props }) => {
 const mapStateToProps = ({ selectedProjectReducer, authReducer }) => {
     const { name} = selectedProjectReducer;
     const { id } = authReducer;
-    return { currentUser: id, name, projectID: projectReducer.id }
+    return { currentUser: id, name, projectID: selectedProjectReducer.id }
 }
 
 export default connect(mapStateToProps, { fetchPage })(Bugs);
