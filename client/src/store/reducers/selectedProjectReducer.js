@@ -9,6 +9,8 @@ const INITIAL_STATE = {
     id: ''
 }
 
+//Reducer for when an admin selects a specific project
+
 export const selectedProjectReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case 'PROJECT_SELECTED':
