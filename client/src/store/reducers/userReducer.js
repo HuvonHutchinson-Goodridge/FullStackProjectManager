@@ -1,4 +1,4 @@
-INITIAL_STATE = [];
+const INITIAL_STATE = [];
 
 //Reducer for storing all of the users in the database
 
