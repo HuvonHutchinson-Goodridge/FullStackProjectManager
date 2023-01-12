@@ -9,7 +9,7 @@ const INITIAL_STATE = {
     id: ''
 }
 
-export const projectReducer = (state = INITIAL_STATE, action) => {
+export const selectedProjectReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case 'PROJECT_SELECTED':
             return { ...state, ...action.payload }
