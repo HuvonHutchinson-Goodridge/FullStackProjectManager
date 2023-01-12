@@ -1,3 +1,4 @@
+//Pages
 import Home from './pages/Home'
 import Login from "./pages/Login"
 import Registration from "./pages/Registration"
@@ -10,16 +11,36 @@ import PieChart from './pages/PieChart'
 import FrontPage from './pages/FrontPage'
 import Projects from './pages/Projects'
 import Bugs from './pages/Bugs'
+
+//From React
+import { useEffect } from 'react'
+import { connect } from 'react-redux'
 import {
     BrowserRouter,
     Routes,
     Route
 } from 'react-router-dom'
+
+//Material UI
 import { ThemeProvider } from '@mui/material'
 import { ColorModeContext, useMode } from './theme'
 
-const App = () => {
+//ActionCreators
+import { loadData } from './store/actions'
+
+const App = (props) => {
     const [theme, colorMode] = useMode();
+    const _loadData = props.loadData;
+
+    useEffect(() => {
+        const load = async () => {
+            if (props.isSignedIn) {
+                await _loadData()
+            }
+        }
+        load();
+        
+    },[props.isSignedIn])
     return (
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
@@ -47,5 +68,9 @@ const App = () => {
     )
 }
 
+const mapStateToProps = ({ authReducer }) => {
+    const { isSignedIn } = authReducer
+    return {isSignedIn}
+}
 
-export default App;
+export default connect(mapStateToProps, { loadData })(App);
