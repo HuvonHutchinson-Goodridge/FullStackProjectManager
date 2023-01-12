@@ -1,4 +1,4 @@
-INITIAL_STATE = [];
+const INITIAL_STATE = [];
 
 /*Reducer for all projects in the database
  * */
