@@ -12,7 +12,9 @@ const rootReducer = combineReducers({
     countReducer,
     authReducer,
     pageReducer,
-    selectedProjectReducer
+    selectedProjectReducer,
+    userReducer,
+    projectReducer
 })
 
 const store = createStore(rootReducer,
