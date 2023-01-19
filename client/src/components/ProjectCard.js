@@ -48,8 +48,8 @@ const ProjectCard = ({selectProject, ...props}) => {
                 <CardHeader
                     title={props.name}
                     sx={{
-                        display: "flex", flexWrap: "nowrap",
-                        "& .MuiTypography-root": { whiteSpace: "nowrap" }
+                        display: "flex"
+                        
                     }}
                 />
                 <CardMedia
