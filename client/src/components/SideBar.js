@@ -21,7 +21,6 @@ import Logo from "./../assets/code2.jpg"
 
 const SideBar = () => {
     const theme = useTheme();
-    const colorMode = useContext(ColorModeContext);
     const colors = tokens(theme.palette.mode);
     const [selected, setSelected] = useState("Dashboard")
 
@@ -87,7 +86,6 @@ const SideBar = () => {
             <List>
                 <Item selected={selected} icon={<PersonOutlinedIcon />} text={"Profile"} to={'profile'} />
                 <Item selected={selected} icon={<CalendarTodayOutlinedIcon />} text={"Calendar"} to={'calendar'} />
-                <Item selected={selected} icon={<HelpOutlinedIcon />} text={"FAQ"} to={'faq'} />
             </List>
             <Typography variant="h6" color={colors.grey[300]} sx={{ m: "15px 0px 0px 5px" }}>
                 Charts
