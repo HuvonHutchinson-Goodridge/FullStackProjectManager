@@ -1,5 +1,4 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
-import { countReducer } from "./reducers/reducer"
 import { authReducer } from "./reducers/authReducer"
 import { pageReducer } from "./reducers/pageReducer"
 import { selectedProjectReducer } from "./reducers/selectedProjectReducer"
@@ -10,7 +9,6 @@ import { composeWithDevTools } from '@redux-devtools/extension'
 import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
-    countReducer,
     bugReducer,
     authReducer,
     pageReducer,
