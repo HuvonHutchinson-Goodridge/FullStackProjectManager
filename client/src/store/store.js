@@ -5,11 +5,13 @@ import { pageReducer } from "./reducers/pageReducer"
 import { selectedProjectReducer } from "./reducers/selectedProjectReducer"
 import { userReducer } from "./reducers/userReducer";
 import { projectReducer } from "./reducers/projectReducer"
+import { bugReducer } from "./reducers/bugReducer";
 import { composeWithDevTools } from '@redux-devtools/extension'
 import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
     countReducer,
+    bugReducer,
     authReducer,
     pageReducer,
     selectedProjectReducer,
