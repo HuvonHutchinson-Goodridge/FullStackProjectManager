@@ -4,7 +4,7 @@ const INITIAL_STATE = [];
  * */
 export const projectReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case "PROJECT":
+        case "PROJECTS":
             return [...state, ...action.payload]
         default:
             return state;
