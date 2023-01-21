@@ -81,9 +81,14 @@ export const loadData = () => {
         try {
             const projects = await API.getAllProjects();
             const users = await API.getAllUsers();
+            const bugs = await API.getAllBugs();
 
             dispatch({
-                type: "PROJECT",
+                type: "BUGS",
+                payload: bugs.data.data
+            })
+            dispatch({
+                type: "PROJECTS",
                 payload: projects.data.data
             })
             dispatch({
