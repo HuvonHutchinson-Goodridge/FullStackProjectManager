@@ -1,11 +1,5 @@
 import API from './../../api/API'
 
-export const ADD = () => {
-    return {
-        type: "ADD_TEN",
-        payload: 0,
-    }
-}
 
 export const LogIn = (credentials, navigate, setFieldError, setSubmitting) => {
     //Make checks and get some data
@@ -81,11 +75,14 @@ export const loadData = () => {
         try {
             const projects = await API.getAllProjects();
             const users = await API.getAllUsers();
-            const bugs = await API.getAllBugs();
-
+            const bugsOnProject = projects.data.data.map(async (project) => {
+                return await API.getAllProjects(project._id, 'bugs')
+            })
+            const bugs = await Promise.all(bugsOnProject)
+          
             dispatch({
                 type: "BUGS",
-                payload: bugs.data.data
+                payload: bugs
             })
             dispatch({
                 type: "PROJECTS",
