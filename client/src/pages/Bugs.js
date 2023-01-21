@@ -1,4 +1,4 @@
-import { Box, Grid, Button, useTheme, TextField } from '@mui/material';
+import { Box, Grid, Button, useTheme } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
 //React
@@ -6,16 +6,16 @@ import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 //Formik
-import { Formik, Form} from 'formik'
+import { Formik, Form } from 'formik'
 
 //Files
 import { tokens } from "./../theme"
 import { fetchPage } from './../store/actions'
 import InputBar from './../components/utils/InputBar'
+import UpdateModal from './../components/modals/updateModal'
 import API from './../api/API'
 
 const Bugs = ({ fetchPage, ...props }) => {
-    const [bugs, setBugs] = useState([])
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
@@ -25,6 +25,11 @@ const Bugs = ({ fetchPage, ...props }) => {
         project: props.projectID
     }
 
+    const handleStatus = async () => {
+        //await API.updateBug()
+        //setStatus((prev) => prev === "Pending" ? "Resolved" : "Pending")
+    }
+
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 100 },
@@ -32,21 +37,34 @@ const Bugs = ({ fetchPage, ...props }) => {
             field: 'bug',
             headerName: 'Bugs',
             flex: 1,
+            type: 'string'
         },
         {
             field: 'assignedTo',
             headerName: 'Assigned To',
             flex: 1,
+            type: 'string'
         },
         {
             field: 'bugStatus',
             headerName: 'Bug Status',
             flex: 1,
+            type: 'string',
+            renderCell: ({ row: { bugStatus } }) => {
+                return (
+                    <Box>
+                        <Button sx={{ backgroundColor: colors.greenAccent[500] }} onClick={handleStatus}>
+                            {bugStatus}
+                        </Button>
+                    </Box>
+                )
+            }
         }
     ];
 
     const createRows = () => {
-        const rows = bugs.map((bug) => {
+      
+        const rows = props.bugs.map((bug) => {
             return {
                 id: bug._id,
                 bug: bug.bug,
@@ -58,20 +76,11 @@ const Bugs = ({ fetchPage, ...props }) => {
     }
 
     useEffect(() => {
-        const getAllBugsOnProject = async () => {
-            try {
-                const { data } = await API.getAllProjects(props.projectID, 'bugs')
-                setBugs(data.data)
-            } catch (err) {
-                console.log(err)
-            }
-        }
-        getAllBugsOnProject()
         fetchPage('Bugs', `Bugs for ${props.name}`)
     }, [fetchPage])
 
     const logBug = async (values) => {
-        
+
         try {
             const { data } = await API.createBugOnProject(values, 'bugs')
             setBugs([...bugs, data.data])
@@ -79,7 +88,7 @@ const Bugs = ({ fetchPage, ...props }) => {
             console.log(err);
         }
     }
-    
+
 
     return (
         <Grid>
@@ -88,7 +97,7 @@ const Bugs = ({ fetchPage, ...props }) => {
                     logBug(values)
                 }}
                 initialValues={initialValues}
-                >
+            >
                 {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
                     <Form onSubmit={handleSubmit}>
                         <Grid item display="flex" justifyContent="space-between" mr="15px">
@@ -141,13 +150,19 @@ const Bugs = ({ fetchPage, ...props }) => {
     );
 }
 
-const mapStateToProps = ({ selectedProjectReducer, authReducer }) => {
-    const { name} = selectedProjectReducer;
+const mapStateToProps = ({ selectedProjectReducer, authReducer, bugReducer }) => {
+    const { name } = selectedProjectReducer;
+    const projectID = selectedProjectReducer.id
     const { id } = authReducer;
-    return { currentUser: id, name, projectID: selectedProjectReducer.id }
+    const bugsOnProject = bugReducer.find((bugs) => {
+        if (bugs[0] != undefined && bugs[0].project === projectID) {
+            return bugs
+        }
+    })
+    
+    return { currentUser: id, name, projectID: selectedProjectReducer.id, bugs: bugsOnProject }
 }
 
 export default connect(mapStateToProps, { fetchPage })(Bugs);
-
 
 
