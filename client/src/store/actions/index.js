@@ -65,6 +65,8 @@ export const selectProject = (details) => {
     }
 }
 
+
+
 export const LogOut = () => {
     return {
         type: "LOG_OUT"
@@ -100,6 +102,7 @@ export const loadData = () => {
             const bugsOnProject = projects.data.data.map(async (project) => {
                 return await API.getAllProjects(project._id, 'bugs')
             })
+
             const bugs = await Promise.all(bugsOnProject).then(values => {
                 const bugData = values.map((value) => {
                     return value.data.data
@@ -120,6 +123,71 @@ export const loadData = () => {
                 payload: users.data.data
             })
             
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+
+//BUGS
+/**
+ * 
+ * @param values contains the bug string to be created
+ * @param bugs contains the array of bugs for associated project
+ */
+
+export const createBug = (values, bugs) => {
+    return async function (dispatch, getState) {
+        try {
+            const data = await API.createBugOnProject(values, "bugs")
+     
+            if (data.status === "success") {
+            
+                bugs.push(data.data.data)
+                dispatch({
+                    type: "BUGS",
+                    payload: {
+                        bugs,
+                        projectID: values.projectID
+                    }
+                }
+                )
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+/**
+ * 
+ * @param changes contains the status of the bug to be updated
+ * @param bugs contains all of the bugs on the project
+ * @param id contains the id of the bug
+ */
+
+export const updateBug = (id, changes, bugs) => {
+    return async function (dispatch) {
+        try {
+            const bugStatus = changes === "Pending" ? "Resolved" : "Pending";
+            const data = await API.updateBug(id, { bugStatus})
+            if (data.status === "success") {
+                bugs.forEach((bug, index, array) => {
+                    if (bug._id === id) {
+                        array[index] = data.data.data
+                    }
+                })
+
+                dispatch({
+                    type: "BUGS",
+                    payload: {
+                        bugs,
+                        projectID: bugs[0].project
+                    }
+                }
+                )
+            }
         } catch (err) {
             console.log(err);
         }
