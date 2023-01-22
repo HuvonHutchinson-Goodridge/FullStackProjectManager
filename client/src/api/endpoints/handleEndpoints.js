@@ -32,7 +32,6 @@ export const updateOne = (resource) => async (id, changes) => {
 }
 
 export const createOne = (resource) => async (values, auxiliary) => {
-    console.log(values)
     let endpoint = (values.project && auxiliary) ?
         `/api/v1/${resource}/${values.project}/${auxiliary}`
         : `/api/v1/${resource}`;
