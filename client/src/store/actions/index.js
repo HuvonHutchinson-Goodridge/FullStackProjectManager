@@ -1,6 +1,12 @@
 import API from './../../api/API'
 
-
+/**
+ * 
+ * @param  credentials responsible for the data from the form
+ * @param  navigate navigates the dashboard upon successful login
+ * @param  setFieldError responsible for creating red error text at bottom of input
+ * @param  setSubmitting confirms the submission of farm
+ */
 export const LogIn = (credentials, navigate, setFieldError, setSubmitting) => {
     //Make checks and get some data
     return async function (dispatch) {
@@ -28,6 +34,11 @@ export const LogIn = (credentials, navigate, setFieldError, setSubmitting) => {
         }
     }
 }
+
+/**
+ * 
+ * @param details of the project that was selected in the bugs component
+ */
 
 export const selectProject = (details) => {
     const { name,
@@ -60,6 +71,12 @@ export const LogOut = () => {
     }
 }
 
+/**
+ * 
+ * @param title for the header
+ * @param subtitle for the smaller title in the header
+ */
+
 export const fetchPage = (title, subtitle) => {
     return {
         type: "PAGE",
@@ -70,13 +87,13 @@ export const fetchPage = (title, subtitle) => {
     }
 }
 
-/*
+/**
  * @function loadData loads data from the API into the redux store
  * 
  * */
 
 export const loadData = () => {
-    return async function (dispatch, getState) {
+    return async function (dispatch) {
         try {
             const projects = await API.getAllProjects();
             const users = await API.getAllUsers();
