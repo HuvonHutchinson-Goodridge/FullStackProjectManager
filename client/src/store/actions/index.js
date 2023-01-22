@@ -70,6 +70,11 @@ export const fetchPage = (title, subtitle) => {
     }
 }
 
+/*
+ * @function loadData loads data from the API into the redux store
+ * 
+ * */
+
 export const loadData = () => {
     return async function (dispatch, getState) {
         try {
@@ -78,7 +83,12 @@ export const loadData = () => {
             const bugsOnProject = projects.data.data.map(async (project) => {
                 return await API.getAllProjects(project._id, 'bugs')
             })
-            const bugs = await Promise.all(bugsOnProject)
+            const bugs = await Promise.all(bugsOnProject).then(values => {
+                const bugData = values.map((value) => {
+                    return value.data.data
+                })
+                return bugData;
+            })
           
             dispatch({
                 type: "BUGS",
