@@ -2,7 +2,7 @@ import { Box, Grid, Button, useTheme } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
 //React
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import { connect } from 'react-redux'
 
 //Formik
@@ -10,12 +10,10 @@ import { Formik, Form } from 'formik'
 
 //Files
 import { tokens } from "./../theme"
-import { fetchPage } from './../store/actions'
+import { fetchPage, createBug, updateBug } from './../store/actions'
 import InputBar from './../components/utils/InputBar'
-import UpdateModal from './../components/modals/updateModal'
-import API from './../api/API'
 
-const Bugs = ({ fetchPage, ...props }) => {
+const Bugs = ({ fetchPage, createBug, updateBug, ...props }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
@@ -23,11 +21,6 @@ const Bugs = ({ fetchPage, ...props }) => {
         bug: "",
         assignedTo: props.currentUser,
         project: props.projectID
-    }
-
-    const handleStatus = async () => {
-        //await API.updateBug()
-        //setStatus((prev) => prev === "Pending" ? "Resolved" : "Pending")
     }
 
 
@@ -50,10 +43,10 @@ const Bugs = ({ fetchPage, ...props }) => {
             headerName: 'Bug Status',
             flex: 1,
             type: 'string',
-            renderCell: ({ row: { bugStatus } }) => {
+            renderCell: ({ row: { bugStatus, id } }) => {
                 return (
                     <Box>
-                        <Button sx={{ backgroundColor: colors.greenAccent[500] }} onClick={handleStatus}>
+                        <Button sx={{ backgroundColor: colors.greenAccent[500] }} onClick={() => updateBug(id, bugStatus, props.bugs)}>
                             {bugStatus}
                         </Button>
                     </Box>
@@ -77,28 +70,19 @@ const Bugs = ({ fetchPage, ...props }) => {
 
     useEffect(() => {
         fetchPage('Bugs', `Bugs for ${props.name}`)
-    }, [fetchPage])
+    }, [fetchPage, props.bugReducer])
 
-    const logBug = async (values) => {
-
-        try {
-            const { data } = await API.createBugOnProject(values, 'bugs')
-            setBugs([...bugs, data.data])
-        } catch (err) {
-            console.log(err);
-        }
-    }
 
 
     return (
         <Grid>
             <Formik
                 onSubmit={(values) => {
-                    logBug(values)
+                    createBug(values, props.bugs)
                 }}
                 initialValues={initialValues}
             >
-                {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
+                {({ values, handleBlur, handleChange, handleSubmit }) => (
                     <Form onSubmit={handleSubmit}>
                         <Grid item display="flex" justifyContent="space-between" mr="15px">
                             <InputBar
@@ -160,9 +144,7 @@ const mapStateToProps = ({ selectedProjectReducer, authReducer, bugReducer }) =>
         }
     })
     
-    return { currentUser: id, name, projectID: selectedProjectReducer.id, bugs: bugsOnProject }
+    return { currentUser: id, name, projectID: selectedProjectReducer.id, bugs: bugsOnProject, bugReducer }
 }
 
-export default connect(mapStateToProps, { fetchPage })(Bugs);
-
-
+export default connect(mapStateToProps, { fetchPage, createBug, updateBug })(Bugs);
