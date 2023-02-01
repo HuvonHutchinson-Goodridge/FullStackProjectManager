@@ -1,25 +1,28 @@
 import { ResponsivePie } from '@nivo/pie'
 import { tokens } from "./../theme";
 import { useTheme } from "@mui/material"
+import { connect } from 'react-redux'
 
-const data = [
-    {
-        "id": "Pending",
-        "label": "Pending",
-        "value": 19100,
-        "color": "hsl(65, 70%, 50%)"
-    },
-    {
-        "id": "Resolved",
-        "label": "Resolved",
-        "value": 546,
-        "color": "hsl(20, 70%, 50%)"
-    },
-]
 
-const Pie = () => {
+
+const Pie = ({bugsPending, bugsResolved}) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
+    const data = [
+        {
+            "id": "Pending",
+            "label": "Pending",
+            "value": `${bugsPending}`,
+            "color": "hsl(65, 70%, 50%)"
+        },
+        {
+            "id": "Resolved",
+            "label": "Resolved",
+            "value": `${bugsResolved}`,
+            "color": "hsl(20, 70%, 50%)"
+        },
+    ]
 
     return (
         <ResponsivePie
@@ -102,4 +105,18 @@ const Pie = () => {
 
 }
 
-export default Pie;
+const mapStateToProps = ({ projectReducer }) => {
+    
+    const bugsData = projectReducer.reduce((acc, cur, index, array) => {
+        acc[0] += cur.bugsResolved;
+        acc[1] += cur.bugsPending;
+        return acc
+    }, [0,0])
+
+    let bugsPending = bugsData[1]
+    let bugsResolved = bugsData[0]
+
+    return { bugsResolved, bugsPending }
+}
+
+export default connect(mapStateToProps)(Pie);
