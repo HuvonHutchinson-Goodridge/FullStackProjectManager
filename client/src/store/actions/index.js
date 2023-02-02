@@ -141,7 +141,7 @@ export const createBug = (values, bugs) => {
     return async function (dispatch, getState) {
         try {
             const data = await API.createBugOnProject(values, "bugs")
-     
+            const projects = await API.getAllProjects();
             if (data.status === "success") {
             
                 bugs.push(data.data.data)
@@ -153,6 +153,10 @@ export const createBug = (values, bugs) => {
                     }
                 }
                 )
+                dispatch({
+                    type: "PROJECTS",
+                    payload: projects.data.data
+                })
             }
         } catch (err) {
             console.log(err)
