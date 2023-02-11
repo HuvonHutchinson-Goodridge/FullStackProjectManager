@@ -16,7 +16,7 @@ const Home = () => {
                 <Avatar image={Logo} />
             </div>
             <StyledTitle size={65}>
-                WELCOME TO BUGTRACKER
+                WELCOME TO THE PROJECT MANAGER
             </StyledTitle>
             <StyledSubTitle size={27}>
                 LOG ALL THE BUGS IN YOUR SOFTWARE
