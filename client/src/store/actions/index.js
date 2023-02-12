@@ -141,7 +141,6 @@ export const createBug = (values, bugs) => {
     return async function (dispatch, getState) {
         try {
             const data = await API.createBugOnProject(values, "bugs")
-            const projects = await API.getAllProjects();
             if (data.status === "success") {
             
                 bugs.push(data.data.data)
@@ -153,10 +152,6 @@ export const createBug = (values, bugs) => {
                     }
                 }
                 )
-                dispatch({
-                    type: "PROJECTS",
-                    payload: projects.data.data
-                })
             }
         } catch (err) {
             console.log(err)
@@ -172,19 +167,40 @@ export const createBug = (values, bugs) => {
  */
 
 export const updateBug = (id, changes, bugs) => {
-    return async function (dispatch) {
+    return async function (dispatch, getState) {
         try {
             const bugStatus = changes === "Pending" ? "Resolved" : "Pending";
-            const data = await API.updateBug(id, { bugStatus})
+            console.log(changes);
+            const data = await API.updateBug(id, { bugStatus })
+            console.log(bugStatus)
+            console.log(data);
             if (data.status === "success") {
+                const updatedBug = data.data.data
                 bugs.forEach((bug, index, array) => {
                     if (bug._id === id) {
-                        array[index] = data.data.data
+                        array[index] = updatedBug
                     }
                 })
 
+                const projects = getState().projectReducer
+                    projects.forEach((project, index, array) => {
+                    if (project._id === bugs[0].project) {
+                        if (updatedBug.bugStatus === "Pending") {
+                            project.bugsPending += 1
+                            project.bugsResolved -= 1;
+                        } else {
+                            project.bugsPending -= 1;
+                            project.bugsResolved += 1;
+                        }
+                    }
+                    })
                 dispatch({
-                    type: "BUGS",
+                    type: 'UPDATED_PROJECTS',
+                    payload: projects
+                })
+
+                dispatch({
+                    type: "UPDATED_BUGS",
                     payload: {
                         bugs,
                         projectID: bugs[0].project
