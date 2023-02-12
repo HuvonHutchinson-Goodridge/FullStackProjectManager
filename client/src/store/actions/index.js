@@ -170,8 +170,9 @@ export const updateBug = (id, changes, bugs) => {
     return async function (dispatch, getState) {
         try {
             const bugStatus = changes === "Pending" ? "Resolved" : "Pending";
+            console.log(bugStatus)
             const data = await API.updateBug(id, { bugStatus })
-
+            console.log(data);
             if (data.status === "success") {
                 const updatedBug = data.data.data
                 bugs.forEach((bug, index, array) => {
@@ -181,9 +182,9 @@ export const updateBug = (id, changes, bugs) => {
                 })
 
                 const projects = getState().projectReducer
-                    projects.forEach((project, index, array) => {
+                    projects.forEach((project) => {
                     if (project._id === bugs[0].project) {
-                        if (updatedBug.bugStatus == "Pending") {
+                        if (updatedBug.bugStatus === "Pending") {
                             project.bugsPending += 1
                             project.bugsResolved -= 1;
                         } else {
