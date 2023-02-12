@@ -22,7 +22,7 @@ const FrontPage = ({ fetchPage, projects }) => {
         const projectBox = projects.map(({ name, bugsResolved, numOfBugs }) => {
             return (
                 <Grid item md={3} container nowrap m="10px 0 0 0" alignItems="center" justifyContent="center">
-                    <StatBox title={name} subtitle="Project" progress={Math.trunc(bugsResolved/numOfBugs * 100) }  icon={
+                    <StatBox title={name} subtitle="Project" progress={bugsResolved/numOfBugs }  icon={
                         <FolderSharedOutlinedIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />
                     } />
                 </Grid>
