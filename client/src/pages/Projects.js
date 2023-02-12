@@ -1,28 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { fetchPage } from "./../store/actions"
 import { connect } from "react-redux"
 import ProjectCard from "./../components/ProjectCard"
 import Grid from "@mui/material/Grid"
-import Box from "@mui/material/Box"
-import API from './../api/API'
-const Projects = ({ fetchPage }) => {
-    const [projects, setProjects] = useState([])
+const Projects = ({fetchPage, ...props }) => {
 
     useEffect(() => {
-        const getProjectData = async () => {
-            try {
-                const { data } = await API.getAllProjects()
-                console.log(data.data)
-                setProjects(data.data)
-            } catch (err) {
-                console.log(err);
-            }
-        }
         fetchPage('Projects', "Here are your projects")
-        getProjectData()
     }, [fetchPage])
 
-    const projectArray = projects.map((project) => {
+    const projectArray = props.projects.map((project) => {
         return <ProjectCard
             project={project}
             key={project.name}
@@ -40,4 +27,8 @@ const Projects = ({ fetchPage }) => {
     )
 }
 
-export default connect(null, { fetchPage })(Projects);
+const mapStateToProps = ({ projectReducer }) => {
+    return {projects: projectReducer}
+}
+
+export default connect(mapStateToProps, { fetchPage })(Projects);
