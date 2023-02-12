@@ -170,9 +170,7 @@ export const updateBug = (id, changes, bugs) => {
     return async function (dispatch, getState) {
         try {
             const bugStatus = changes === "Pending" ? "Resolved" : "Pending";
-            console.log(bugStatus)
             const data = await API.updateBug(id, { bugStatus })
-            console.log(data);
             if (data.status === "success") {
                 const updatedBug = data.data.data
                 bugs.forEach((bug, index, array) => {
