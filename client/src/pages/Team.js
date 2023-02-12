@@ -11,7 +11,7 @@ import { connect } from "react-redux"
 
 //NEED TO IMPLEMENT DELETE USER FROM DATABASE
 
-const Team = ({fetchPage}) => {
+const Team = ({fetchPage, ...props}) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const columns = [
@@ -73,20 +73,8 @@ const Team = ({fetchPage}) => {
         },
     ];
 
-    const [users, setUsers] = useState([])
     useEffect(() => {
-        const getUserData = async () => {
-            
-                const { data } = await axios.get('/api/v1/users', {
-                    headers: {
-                        'Content-type': 'application/json'
-                    }
-                })
-                setUsers(data.data.data)
-            
-        }
         fetchPage("TEAM", "Here is your team");
-        getUserData();
     }, [fetchPage])
 
     
@@ -118,7 +106,7 @@ const Team = ({fetchPage}) => {
 
             <DataGrid
                 getRowId={(row) => row._id}
-                rows={users}
+                rows={props.users}
                 columns={columns}
                 disableSelectionOnClick
                 experimentalFeatures={{ newEditingApi: true }}
@@ -128,4 +116,7 @@ const Team = ({fetchPage}) => {
     );
 }
 
-export default connect(null, { fetchPage })(Team);
+const mapStateToProps = ({ userReducer }) => {
+    return {users: userReducer}
+}
+export default connect(mapStateToProps, { fetchPage })(Team);
