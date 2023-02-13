@@ -20,6 +20,9 @@ All user data, can be modified, deleted, or created by admins or the user themse
 ## Displays all bugs in a specific project
 ![image](https://user-images.githubusercontent.com/75647839/218280981-cba4f118-e72b-4d26-ac9b-edab3160c25d.png)
 
+## Page for adding admins to the database
+![image](https://user-images.githubusercontent.com/75647839/218432896-1cc31cbf-fb92-4187-a150-f23c522fecd1.png)
+
 # For Server Portion
 
 # Getting Started with Express
