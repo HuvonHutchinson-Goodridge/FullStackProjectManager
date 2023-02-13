@@ -8,6 +8,7 @@ Express API with MongoDB that manages users, projects, and software issues for t
 
 ## Login and Registration
 ![image](https://user-images.githubusercontent.com/75647839/218280625-3383f4e7-272a-45d8-b886-94db74910e4b.png)
+![image](https://user-images.githubusercontent.com/75647839/218432015-9517ed50-c630-4cb7-9351-2d550294d446.png)
 
 ## Displays All Users in the Account
 All user data, can be modified, deleted, or created by admins or the user themself.
