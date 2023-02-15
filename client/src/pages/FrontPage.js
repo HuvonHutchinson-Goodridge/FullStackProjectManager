@@ -50,7 +50,7 @@ const FrontPage = ({ fetchPage, projects }) => {
                 {createBox(projects)}
             </Grid>
             <Grid item container>
-                <Grid item md={6} height="50vh" container alignItems="center" justifyContent="center">
+                <Grid item md={6} height="50vh">
                     <Pie />
                 </Grid>
             </Grid>
