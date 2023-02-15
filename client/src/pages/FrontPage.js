@@ -53,9 +53,6 @@ const FrontPage = ({ fetchPage, projects }) => {
                 <Grid item md={6} height="50vh" container alignItems="center" justifyContent="center">
                     <Pie />
                 </Grid>
-                <Grid item md={6}>
-                    <Team height = "50vh" />
-                </Grid>
             </Grid>
         </Grid >
 
