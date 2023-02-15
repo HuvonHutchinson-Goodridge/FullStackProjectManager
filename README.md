@@ -1,7 +1,27 @@
 # FullStackProjectManager
 
-Express API with MongoDB that manages users, projects, and software issues for the coordination of teams on different projects. 
 Uses React/Redux with Material UI to implement an admin dashboard to interface with the API.
+Express API with MongoDB that manages users, projects, and software issues for the coordination of teams on different projects. 
+
+## Home Page
+![image](https://user-images.githubusercontent.com/75647839/218280509-0db111db-7ccf-475f-9d18-8b4b9f4cd1e5.png)
+
+## Login and Registration
+![image](https://user-images.githubusercontent.com/75647839/218280625-3383f4e7-272a-45d8-b886-94db74910e4b.png)
+![image](https://user-images.githubusercontent.com/75647839/218432015-9517ed50-c630-4cb7-9351-2d550294d446.png)
+
+## Displays All Users in the Account
+All user data, can be modified, deleted, or created by admins or the user themself.
+![image](https://user-images.githubusercontent.com/75647839/218280690-e85fd72c-2fc5-4e64-94a0-a71e3eb08d1d.png)
+
+## Displays all current projects
+![image](https://user-images.githubusercontent.com/75647839/218280762-3b2e902b-f859-4b6b-ac80-dcca8f29c161.png)
+
+## Displays all bugs in a specific project
+![image](https://user-images.githubusercontent.com/75647839/218280981-cba4f118-e72b-4d26-ac9b-edab3160c25d.png)
+
+## Page for adding admins to the database
+![image](https://user-images.githubusercontent.com/75647839/218432896-1cc31cbf-fb92-4187-a150-f23c522fecd1.png)
 
 # For Server Portion
 
