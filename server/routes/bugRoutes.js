@@ -6,9 +6,6 @@ const router = express.Router({mergeParams: true});
 
 router.use(authController.protect);
 
-router.route('/stats')
-    .get(bugController.getBugStats);
-
 router.route('/')
     .get(bugController.getAllBugs)
     .post(bugController.setProjectUserIds, bugController.createBug);
