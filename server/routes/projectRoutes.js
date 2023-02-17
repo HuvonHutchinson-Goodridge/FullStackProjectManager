@@ -18,6 +18,6 @@ router.route('/:id')
     .patch(authController.restrictTo('admin'),
         projectController.updateProject)
     .delete(authController.restrictTo('admin'),
-        projectController.createProject);
+        projectController.deleteProject);
 
 module.exports = router;
