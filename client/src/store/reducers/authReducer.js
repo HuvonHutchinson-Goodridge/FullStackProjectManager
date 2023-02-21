@@ -12,7 +12,7 @@ export const authReducer = (state = INITIAL_STATE, action) => {
 		case "LOG_IN":
 			return { ...state, ...action.payload, isSignedIn: true}
 		case "LOG_OUT":
-			return { ...state, isSignedIn: false };
+			return { ...state, ...INITIAL_STATE, isSignedIn: false };
 		default:
 			return state;
 	}
