@@ -1,5 +1,8 @@
+//Styled-Components
 import { StyledTitle, StyledSubTitle, Avatar, StyledButton, ButtonGroup } from "../components/styles"
 import { StyledContainer } from './../components/styles'
+
+//Images
 import Logo from "./../assets/icon.jfif"
 
 const Home = () => {
