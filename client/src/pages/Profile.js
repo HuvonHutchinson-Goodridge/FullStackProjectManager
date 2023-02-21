@@ -59,7 +59,8 @@ const Profile = ({ fetchPage }) => {
                         value={props.value}
                         variant="filled"
                         type="text"
-                        onChange={props.onChange}                        error={props.error}
+                        onChange={props.onChange}
+                        error={props.error}
                     />
                 </Box>
             </Grid>
