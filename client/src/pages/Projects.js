@@ -1,8 +1,16 @@
-import { useEffect} from "react";
-import { fetchPage } from "./../store/actions"
-import { connect } from "react-redux"
+//Components
 import ProjectCard from "./../components/ProjectCard"
+
+//Action Creators
+import { fetchPage } from "./../store/actions"
+
+//React
+import { useEffect } from "react";
+import { connect } from "react-redux"
+
+//Material UI
 import Grid from "@mui/material/Grid"
+
 const Projects = ({fetchPage, ...props }) => {
 
     useEffect(() => {
