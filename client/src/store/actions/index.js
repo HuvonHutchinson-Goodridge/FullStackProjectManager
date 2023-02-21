@@ -1,7 +1,8 @@
 import API from './../../api/API'
+import Cookies from 'js-cookie'
 
 /**
- * 
+ * @function LogIn logs the user in
  * @param  credentials responsible for the data from the form
  * @param  navigate navigates the dashboard upon successful login
  * @param  setFieldError responsible for creating red error text at bottom of input
@@ -36,7 +37,7 @@ export const LogIn = (credentials, navigate, setFieldError, setSubmitting) => {
 }
 
 /**
- * 
+ * @function selectProject selects a project to be displayed on the bug page.
  * @param details of the project that was selected in the bugs component
  */
 
@@ -66,15 +67,20 @@ export const selectProject = (details) => {
 }
 
 
-
-export const LogOut = () => {
+/**
+ * @function LogOut removes the JWT from local storage
+ * @param navigate directs you to the homepage
+ */
+export const LogOut = (navigate) => {
+    Cookies.remove("JWT");
+    navigate("/")
     return {
         type: "LOG_OUT"
     }
 }
 
 /**
- * 
+ * @function fetchPage creates the title and the subtitle for the header
  * @param title for the header
  * @param subtitle for the smaller title in the header
  */
@@ -132,7 +138,7 @@ export const loadData = () => {
 
 //BUGS
 /**
- * 
+ * @function createBug adds a bug to the state and the backend database
  * @param values contains the bug string to be created
  * @param bugs contains the array of bugs for associated project
  */
@@ -160,7 +166,7 @@ export const createBug = (values, bugs) => {
 }
 
 /**
- * 
+ * @function updateBug updates a bug in the backend and the state
  * @param changes contains the status of the bug to be updated
  * @param bugs contains all of the bugs on the project
  * @param id contains the id of the bug
