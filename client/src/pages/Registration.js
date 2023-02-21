@@ -1,19 +1,23 @@
-import React from 'react';
-import axios from 'axios';
+//Styled Components
 import { StyledContainer } from './../components/styles'
 import { CopyrightText, ButtonGroup, ExtraText, TextLink, StyledFormArea, StyledFormButton, Avatar, colors, StyledTitle } from './../components/styles'
 
-//formik
+//Logo
+import Logo from "./../assets/icon.jfif"
+
+//React
+import React from 'react';
+import axios from 'axios';
+
+//Formik
 import { Formik, Form } from 'formik'
 import { TextInput } from "./../components/FormLib"
 import * as Yup from 'yup';
-//logo
-import Logo from "./../assets/icon.jfif"
 
-//icons
+//Icons
 import { FiMail, FiLock, FiUser } from 'react-icons/fi'
 
-//loader
+//Loader
 import { ThreeDots } from 'react-loader-spinner';
 import { useNavigate } from "react-router-dom";
 
