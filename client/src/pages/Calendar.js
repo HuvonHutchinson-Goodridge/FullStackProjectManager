@@ -27,11 +27,10 @@ const Calendar = ({ fetchPage }) => {
     const handleDateClick = (selected) => {
         const title = prompt("Please enter a new title for your event");
         const calendarAPI = selected.view.calendar;
-        calendarAPI.unselect();
-
+        console.log(currentEvents)
         if (title) {
-            calendarAPI.addEvent({
-                id: `${selected.dateStr} - ${title}`,
+            calendarAPI.addEventSource({
+                id: `${selected.start}: ${title}`,
                 title,
                 state: selected.startStr,
                 end: selected.endStr,
