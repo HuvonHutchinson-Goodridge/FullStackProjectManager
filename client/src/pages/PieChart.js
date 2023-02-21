@@ -1,8 +1,15 @@
+//Material UI
 import { Box, Grid } from "@mui/material";
-import { fetchPage } from "./../store/actions"
+
+//React 
 import { connect } from "react-redux"
 import { useEffect } from "react"
+
+//Components
 import Pie from "./../components/Pie";
+
+//Action Creators 
+import { fetchPage } from "./../store/actions"
 
 const PieChart = ({ fetchPage }) => {
     useEffect(() => {
