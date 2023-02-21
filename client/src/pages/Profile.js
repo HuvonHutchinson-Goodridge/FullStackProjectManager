@@ -1,15 +1,24 @@
-import React from 'react';
+//API
 import API from './../api/API'
+
+//Color Theme
+import { tokens } from './../theme'
+
+//React
+import React from 'react';
 import { useEffect } from 'react'
-import { fetchPage } from "./../store/actions"
 import { connect } from 'react-redux'
-import { Formik, Form, useField } from 'formik'
+import { fetchPage } from "./../store/actions"
+
+//Formik and Yup
+import { Formik, Form} from 'formik'
 import * as Yup from 'yup'
+
+//Material UI
 import { Grid, Box, IconButton, useTheme, TextField, Button } from "@mui/material"
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
-import { tokens } from './../theme'
 
 const validationSchema = Yup.object({
     firstName: Yup.string().required("Required"),
