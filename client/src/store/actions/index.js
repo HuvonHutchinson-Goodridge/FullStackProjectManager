@@ -72,11 +72,24 @@ export const selectProject = (details) => {
  * @param navigate directs you to the homepage
  */
 export const LogOut = (navigate) => {
-    Cookies.remove("JWT");
-    navigate("/")
-    return {
-        type: "LOG_OUT"
+
+    return async function (dispatch) {
+        try {
+            const data = await API.logoutUser();
+  
+            if (data.status === "success") {
+                Cookies.remove("JWT");
+                navigate("/")
+                dispatch({
+                    type: "LOG_OUT"
+                })
+                window.location.reload();
+            }
+        }catch (err) {
+            console.log(err);
+        }
     }
+    
 }
 
 /**
