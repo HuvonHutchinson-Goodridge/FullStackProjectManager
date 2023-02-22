@@ -56,7 +56,11 @@ const Bugs = ({ fetchPage, createBug, updateBug, ...props }) => {
     ];
 
     const createRows = () => {
-      
+
+        if (props.bugs === undefined) {
+            const rows = []
+            return rows;
+        }
         const rows = props.bugs.map((bug) => {
             return {
                 id: bug._id,
