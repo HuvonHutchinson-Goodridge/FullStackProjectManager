@@ -29,7 +29,6 @@ export const loginUser = async (credentials) => {
 
 /**
  * @function LogOut logs out a user
- * @param dispatch contains dispatch function to send actions to redux store to update login status
  */
 export const logoutUser = async () => {
     const { data } = await axios.post("/api/v1/users/logout", {
