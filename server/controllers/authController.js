@@ -63,6 +63,25 @@ exports.login = catchAsync(async (request, response, next) => {
     createSendToken(user, 200, response);
 })
 
+exports.logout = catchAsync(async (request, response, next) => {
+
+    const cookieOptions = {
+        expires: new Date(Date.now() + 1 * 1000),
+        httpOnly: true
+    }
+
+    response.cookie("jwt", null, cookieOptions)
+
+    if (process.env.NODE_ENV === "production") {
+        cookieOptions.secure = true;
+    }
+
+    response.status(200).json({
+        status: "success",
+        message: "User logged out successfully"
+    })
+})
+
 exports.protect = catchAsync(async (request, response, next) => {
  
     //Getting token and check if its there
