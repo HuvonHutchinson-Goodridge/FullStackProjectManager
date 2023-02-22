@@ -37,7 +37,6 @@ export const logoutUser = async () => {
             "Content-type": "application/json"
         }
     })
-    console.log(data);
     return data
 }
 
