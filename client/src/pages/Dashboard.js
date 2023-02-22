@@ -5,8 +5,17 @@ import { StyledContainer } from './../components/styles'
 //Images
 import Logo from "./../assets/icon.jfif"
 
+//Action Creators
+import { LogOut } from './../store/actions'
+
+//React
 import { connect } from 'react-redux'
-const Dashboard = ({ firstName, lastName }) => {
+import { useNavigate } from 'react-router-dom'
+
+const Dashboard = ({ firstName, lastName, LogOut }) => {
+
+    const navigate = useNavigate();
+
     return (
         <div>
             <StyledContainer>
@@ -26,7 +35,7 @@ const Dashboard = ({ firstName, lastName }) => {
                         LOG ALL THE BUGS IN YOUR SOFTWARE
                     </StyledSubTitle>
                     <ButtonGroup>
-                        <StyledButton to="/">Logout</StyledButton>
+                        <StyledButton onClick={() => LogOut(navigate)}>Logout</StyledButton>
                         <StyledButton to="/bug/frontpage">Bugs</StyledButton>
                     </ButtonGroup>
                 </StyledFormArea>
@@ -39,4 +48,4 @@ const mapStateToProps = (state) => {
     return { firstName: state.authReducer.firstName, lastName: state.authReducer.lastName };
 }
 
-export default connect(mapStateToProps, null)(Dashboard);
+export default connect(mapStateToProps, {LogOut})(Dashboard);
