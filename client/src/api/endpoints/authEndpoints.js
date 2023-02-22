@@ -15,8 +15,9 @@ export const register = async (credentials) => {
 
 /**
  * Log in a user
- * @param dispatch contains dispatch function to send actions to redux store to update login status
+ * @param credentials holds email and password
  */
+ 
 export const loginUser = async (credentials) => {
     const { data } = await axios.post("/api/v1/users/login", credentials, {
         headers: {
@@ -26,7 +27,22 @@ export const loginUser = async (credentials) => {
     return data;
 }
 
+/**
+ * @function LogOut logs out a user
+ * @param dispatch contains dispatch function to send actions to redux store to update login status
+ */
+export const logoutUser = async () => {
+    const { data } = await axios.post("/api/v1/users/logout", {
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+    console.log(data);
+    return data
+}
+
 export default {
     loginUser,
-    register
+    register,
+    logoutUser,
 }
