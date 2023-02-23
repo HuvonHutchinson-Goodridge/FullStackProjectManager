@@ -40,7 +40,7 @@ const App = (props) => {
         }
         load();
         
-    },[props.isSignedIn])
+    },[props.isSignedIn, _loadData])
     return (
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
