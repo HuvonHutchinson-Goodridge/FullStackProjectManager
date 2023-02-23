@@ -11,8 +11,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid'
-import { useTheme } from "@mui/material"
-import { tokens } from './../theme'
 import { Link as RouterLink } from 'react-router-dom'
 import { selectProject } from './../store/actions'
 import { connect } from 'react-redux'
