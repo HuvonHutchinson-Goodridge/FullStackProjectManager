@@ -74,7 +74,7 @@ const Bugs = ({ fetchPage, createBug, updateBug, ...props }) => {
 
     useEffect(() => {
         fetchPage('Bugs', `Bugs for ${props.name}`)
-    }, [fetchPage, props.bugReducer])
+    }, [fetchPage, props.bugReducer, props.name])
 
 
 
@@ -143,7 +143,7 @@ const mapStateToProps = ({ selectedProjectReducer, authReducer, bugReducer }) =>
     const projectID = selectedProjectReducer.id
     const { id } = authReducer;
     const bugsOnProject = bugReducer.find((bugs) => {
-        if (bugs[0] != undefined && bugs[0].project === projectID) {
+        if (bugs[0] !== undefined && bugs[0].project === projectID) {
             return bugs
         }
     })
