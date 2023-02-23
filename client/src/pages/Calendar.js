@@ -17,7 +17,6 @@ import {
     useTheme
 } from "@mui/material";
 import { tokens } from "./../theme";
-import timegrid from "@fullcalendar/timegrid";
 
 const Calendar = ({ fetchPage }) => {
     const theme = useTheme();
