@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { connect } from 'react-redux'
-import  FullCalendar  from "@fullcalendar/react";
+import FullCalendar from "@fullcalendar/react";
 import { formatDate } from '@fullcalendar/core'
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -22,56 +22,64 @@ import timegrid from "@fullcalendar/timegrid";
 const Calendar = ({ fetchPage }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [currentEvents, setCurrentEvents] = useState([]);
+    const [currentEvents, setCurrentEvents] = useState([
+    ]);
     //Create modals
     const handleDateClick = (selected) => {
         const title = prompt("Please enter a new title for your event");
-        const calendarAPI = selected.view.calendar;
-        console.log(currentEvents)
         if (title) {
-            calendarAPI.addEventSource({
+            setCurrentEvents([...currentEvents, {
                 id: `${selected.start}: ${title}`,
                 title,
-                state: selected.startStr,
+                start: selected.startStr,
                 end: selected.endStr,
                 allDay: selected.allDay
-            })
+            }])
         }
     }
 
     const handleEventClick = (selected) => {
         if (window.confirm(`Are you sure you want to delete the event '${selected.event.title}'`)) {
             selected.event.remove();
+
+
         }
+        const newEvents = currentEvents.filter((event) => {
+            return event.id !== selected.event._def.publicId
+        })
+        setCurrentEvents([...newEvents])
     }
 
     useEffect(() => {
         fetchPage("CALENDAR", "THESE ARE YOUR EVENTS")
+    }, [fetchPage, currentEvents])
+
+    const eventList = currentEvents.map((event) => {
+        return (<ListItem
+            key={event.id}
+            sx={{
+                backgroundColor: colors.greenAccent[500],
+                margin: "10px 0",
+                borderRadius: "2px"
+            }}>
+            <ListItemText
+                primary={event.title}
+                secondary={< Typography >
+                    {formatDate(event.start, { year: "numeric", month: "short", day: "numeric" })}
+                </Typography>}
+            >
+            </ListItemText>
+
+        </ListItem>)
     })
 
-    return (<Box m="20px">
-        <Grid container wrap="nowrap"md={12}>
-            <Grid item md={3} flex="1 1 20%" backgroundColor={colors.primary[400]} p="15px" borderRadius="4px">
+    return (<Box m="20px" padding="20px 10px 10px 0">
+        <Grid container wrap="nowrap" md={12} backgroundColor="white" padding="20px 10px 10px 0">
+            <Grid item md={3} flex="1 1 20%" backgroundColor={colors.grey[100]} p="15px" borderRadius="4px">
                 <Typography variant="h5">Events</Typography>
                 <List>
-                    {currentEvents.map((event) => {
-                        <ListItem
-                            key={event.id}
-                            sx={{
-                                backgroundColor: colors.greentAccent[500],
-                                margin: "10px 0",
-                                borderRadius: "2px"
-
-                            }}>
-                            <ListItemText
-                                primary={event.title}
-                                secondary={<Typography>{formatDate(event.start), {
-                                    year: "numeric", month: "short", day: "numeric"
-                                }}</Typography>}/>
-
-                            </ListItem>
-                    })}
-                    </List>
+                    {eventList}
+                </List>
             </Grid>
             <Grid item md={9} flex="1 1 100%" ml="15px">
                 <FullCalendar height="75vh" plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
@@ -86,14 +94,13 @@ const Calendar = ({ fetchPage }) => {
                     selectMirror={true}
                     dayMaxEvents={true}
                     select={handleDateClick}
-                    eventclick={handleEventClick}
-                    eventsSet={events => setCurrentEvents(events)}
-                  
-                    />
-                </Grid>
+                    events={currentEvents}
+                    eventClick={selected => handleEventClick(selected)}
+                />
             </Grid>
+        </Grid>
     </Box>
-        )
+    )
 }
 
-        export default connect(null, {fetchPage})(Calendar);
+export default connect(null, { fetchPage })(Calendar);
