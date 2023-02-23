@@ -9,14 +9,12 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined"
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined"
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined"
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
-import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined"
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined"
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined"
 import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined';
 import { Link as RouterLink } from 'react-router-dom'
 import { useTheme } from '@mui/material'
-import { ColorModeContext, tokens } from "./../theme"
-import { useContext } from 'react';
+import { tokens } from "./../theme"
 import Logo from "./../assets/code2.jpg"
 
 const SideBar = () => {
