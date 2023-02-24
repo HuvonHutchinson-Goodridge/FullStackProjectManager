@@ -212,10 +212,6 @@ export const updateBug = (id, changes, bugs) => {
                         }
                     }
                     })
-                dispatch({
-                    type: 'UPDATED_PROJECTS',
-                    payload: projects
-                })
 
                 dispatch({
                     type: "UPDATED_BUGS",
