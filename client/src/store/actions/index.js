@@ -159,18 +159,20 @@ export const loadData = () => {
 export const createBug = (values, bugs) => {
     return async function (dispatch, getState) {
         try {
-            const data = await API.createBugOnProject(values, "bugs")
-            if (data.status === "success") {
-            
-                bugs.push(data.data.data)
-                dispatch({
-                    type: "BUGS",
-                    payload: {
-                        bugs,
-                        projectID: values.projectID
+            if (values.bug.length > 1) {
+                const data = await API.createBugOnProject(values, "bugs")
+                if (data.status === "success") {
+
+                    bugs.push(data.data.data)
+                    dispatch({
+                        type: "CREATED_BUGS",
+                        payload: {
+                            bugs,
+                            projectID: values.project
+                        }
                     }
+                    )
                 }
-                )
             }
         } catch (err) {
             console.log(err)
