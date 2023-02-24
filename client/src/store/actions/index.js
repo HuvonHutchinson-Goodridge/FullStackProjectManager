@@ -227,3 +227,31 @@ export const updateBug = (id, changes, bugs) => {
         }
     }
 }
+
+
+/**
+ * @function deleteBug deletes a bug from the backend and from the state
+ * @param id contains the id of the bug
+ */
+
+export const deleteBug = (id, projectID) => {
+
+    return async function (dispatch) {
+
+        try {
+            await API.deleteBug(id);
+
+            dispatch({
+                type: "DELETE_BUGS",
+                payload: {
+                    id,
+                    projectID
+                }
+            })
+
+        } catch(err) {
+            console.err(err);
+        }
+
+    }
+}
