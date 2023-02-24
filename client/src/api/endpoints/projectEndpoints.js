@@ -7,7 +7,7 @@ export const createProject = handleEndpoints.createOne('projects');
 export const deleteProject = handleEndpoints.deleteOne('projects')
 export const createBugOnProject = handleEndpoints.createOne('projects')
 
-export default {
+const projectEndpoints = {
     getAllProjects,
     getProject,
     updateProject,
@@ -15,3 +15,5 @@ export default {
     createBugOnProject,
     deleteProject
 }
+
+export default projectEndpoints 

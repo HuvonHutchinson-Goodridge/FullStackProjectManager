@@ -45,10 +45,12 @@ export const deleteOne = (resource) => async (id) => {
     return data;
 }
 
-export default {
+const handleEndpoints = {
     getAll,
     getOne,
     updateOne,
     createOne,
     deleteOne
 }
+
+export default handleEndpoints

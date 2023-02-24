@@ -6,10 +6,12 @@ export const updateBug = handleEndpoints.updateOne('bugs');
 export const createBug = handleEndpoints.createOne('bugs');
 export const deleteBug = handleEndpoints.deleteOne('bugs')
 
-export default {
+const bugEndpoints = {
     getAllBugs,
     getBug,
     updateBug,
     createBug,
     deleteBug
 }
+
+export default bugEndpoints

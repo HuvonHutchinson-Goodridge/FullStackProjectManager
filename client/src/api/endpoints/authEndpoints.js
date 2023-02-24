@@ -39,8 +39,10 @@ export const logoutUser = async () => {
     return data
 }
 
-export default {
+const authEndpoints = {
     loginUser,
     register,
     logoutUser,
 }
+
+export default authEndpoints
