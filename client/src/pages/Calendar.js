@@ -41,12 +41,12 @@ const Calendar = ({ fetchPage }) => {
         if (window.confirm(`Are you sure you want to delete the event '${selected.event.title}'`)) {
             selected.event.remove();
 
+            const newEvents = currentEvents.filter((event) => {
+                return event.id !== selected.event._def.publicId
+            })
+            setCurrentEvents([...newEvents])
 
         }
-        const newEvents = currentEvents.filter((event) => {
-            return event.id !== selected.event._def.publicId
-        })
-        setCurrentEvents([...newEvents])
     }
 
     useEffect(() => {
