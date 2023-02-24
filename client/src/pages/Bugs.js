@@ -10,10 +10,10 @@ import { Formik, Form } from 'formik'
 
 //Files
 import { tokens } from "./../theme"
-import { fetchPage, createBug, updateBug } from './../store/actions'
+import { fetchPage, createBug, updateBug, deleteBug } from './../store/actions'
 import InputBar from './../components/utils/InputBar'
 
-const Bugs = ({ fetchPage, createBug, updateBug, ...props }) => {
+const Bugs = ({ fetchPage, createBug, updateBug, deleteBug, ...props }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
@@ -51,6 +51,20 @@ const Bugs = ({ fetchPage, createBug, updateBug, ...props }) => {
                         </Button>
                     </Box>
                 )
+            }
+        },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 1,
+            type: 'string',
+            renderCell: ({ row: { id, project } }) => {
+                return (
+                    <Box>
+                        <Button sx={{ backgroundColor: colors.greenAccent[500] }} onClick={() => deleteBug(id, project)}>
+                            DELETE
+                            </Button>
+                        </Box>)
             }
         }
     ];
@@ -151,4 +165,4 @@ const mapStateToProps = ({ selectedProjectReducer, authReducer, bugReducer }) =>
     return { currentUser: id, name, projectID: selectedProjectReducer.id, bugs: bugsOnProject, bugReducer }
 }
 
-export default connect(mapStateToProps, { fetchPage, createBug, updateBug })(Bugs);
+export default connect(mapStateToProps, { fetchPage, createBug, updateBug, deleteBug })(Bugs);
