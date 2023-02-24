@@ -18,6 +18,17 @@ export const bugReducer = (state = INITIAL_STATE, action) => {
                     }
                 })
                 return [...state]
+            case "DELETE_BUGS":
+                state.forEach((bugsOnProject, index, array) => {
+                    if (bugsOnProject[0] !== undefined && action.payload.projectID === bugsOnProject.project) {
+                        const filtered = bugsOnProject.filter((cur, i, arr) => {
+                            return cur._id !== action.payload.id;
+                        })
+                        array[index] = filtered;
+                    }
+                    
+                })
+                return [...state]
             case "BUGS":
                 return [...state, ...action.payload]
             default:
