@@ -2,7 +2,7 @@ import { Box, Grid, Button, useTheme } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
 //React
-import { useEffect} from 'react'
+import { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 //Formik
@@ -63,8 +63,8 @@ const Bugs = ({ fetchPage, createBug, updateBug, deleteBug, ...props }) => {
                     <Box>
                         <Button sx={{ backgroundColor: colors.greenAccent[500] }} onClick={() => deleteBug(id, project)}>
                             DELETE
-                            </Button>
-                        </Box>)
+                        </Button>
+                    </Box>)
             }
         }
     ];
@@ -147,7 +147,13 @@ const Bugs = ({ fetchPage, createBug, updateBug, deleteBug, ...props }) => {
                     experimentalFeatures={{ newEditingApi: true }}
                     sx={{ backgroundColor: colors.primary[400] }}
                 />
+                
             </Grid>
+            <Box display="flex" justifyContent="right" alignItems="flex-start" mr="15px" height= "100px">
+                <Button color="secondary" variant="contained" >
+                    Manage Team
+                </Button>
+            </Box>
         </Grid>
     );
 }
@@ -161,7 +167,7 @@ const mapStateToProps = ({ selectedProjectReducer, authReducer, bugReducer }) =>
             return bugs
         }
     })
-    
+
     return { currentUser: id, name, projectID: selectedProjectReducer.id, bugs: bugsOnProject, bugReducer }
 }
 
