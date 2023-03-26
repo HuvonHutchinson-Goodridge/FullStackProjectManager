@@ -73,14 +73,14 @@ const Calendar = ({ fetchPage }) => {
     })
 
     return (<Box m="20px" padding="20px 10px 10px 0">
-        <Grid container wrap="nowrap" md={12} backgroundColor="white" padding="20px 10px 10px 0">
+        <Grid container wrap="nowrap" md={12} backgroundColor="white" padding="0px 10px 0px 0px" borderRadius="3px">
             <Grid item md={3} flex="1 1 20%" backgroundColor={colors.grey[100]} p="15px" borderRadius="4px">
                 <Typography variant="h5">Events</Typography>
                 <List>
                     {eventList}
                 </List>
             </Grid>
-            <Grid item md={9} flex="1 1 100%" ml="15px">
+            <Grid item md={9} flex="1 1 100%" ml="10px" padding="20px 10px">
                 <FullCalendar height="75vh" plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
                     headerToolbar={{
                         left: "prev,next, today",
