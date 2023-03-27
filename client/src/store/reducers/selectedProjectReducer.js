@@ -6,7 +6,8 @@ const INITIAL_STATE = {
     bugsResolved: 0,
     description: '',
     image: '',
-    id: ''
+    id: '',
+    users: []
 }
 
 //Reducer for when an admin selects a specific project
