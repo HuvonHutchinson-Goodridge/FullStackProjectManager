@@ -49,7 +49,7 @@ export const selectProject = (details) => {
         bugsPending, 
         bugsResolved, 
         description, 
-        id } = details
+        id, users } = details
 
     return {
         type: "PROJECT_SELECTED",
@@ -61,7 +61,8 @@ export const selectProject = (details) => {
             bugsResolved,
             description,
             image,
-            id
+            id,
+            users
         }
     }
 }
