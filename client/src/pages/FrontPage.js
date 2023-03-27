@@ -16,7 +16,7 @@ const FrontPage = ({ fetchPage, projects }) => {
     const colors = tokens(theme.palette.mode);
 
     useEffect(() => {
-        fetchPage("DASHBOARD", "Welcome to your dashboard")
+        fetchPage("DASHBOARD", "Welcome to your dashboard".toUpperCase())
     }, [fetchPage])
 
     const createBox = (projects) => {

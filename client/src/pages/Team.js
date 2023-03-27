@@ -80,7 +80,7 @@ const Team = ({fetchPage, ...props}) => {
     ];
 
     useEffect(() => {
-        fetchPage("TEAM", "Here is your team");
+        fetchPage("TEAM", "HERE IS YOUR TEAM");
     }, [fetchPage])
 
     

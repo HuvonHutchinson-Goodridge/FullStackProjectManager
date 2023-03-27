@@ -14,7 +14,7 @@ import Grid from "@mui/material/Grid"
 const Projects = ({fetchPage, ...props }) => {
 
     useEffect(() => {
-        fetchPage('Projects', "Here are your projects")
+        fetchPage('Projects', "HERE ARE YOUR PROJECTS".toUpperCase())
     }, [fetchPage])
 
     const projectArray = props.projects.map((project) => {
