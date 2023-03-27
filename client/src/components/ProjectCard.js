@@ -41,7 +41,7 @@ const ProjectCard = ({selectProject, ...props}) => {
     }
 
     return (
-        <Grid item container justifyContent="center" md={3}>
+        <Grid item container justifyContent="center" alignItems="flex-start" md={3}>
             <Card sx={{ width: 280 }}>
                 <CardHeader
                     title={props.name}
