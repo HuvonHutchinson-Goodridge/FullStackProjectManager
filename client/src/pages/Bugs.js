@@ -176,12 +176,6 @@ const Bugs = ({ fetchPage, createBug, updateBug, deleteBug, ...props }) => {
         setSeeTeam(prev => prev === false)
     }
 
-    //useEffect(() => {
-    //    fetchPage('Bugs', `Bugs for ${props.name}`.toUpperCase())
-    //}, [fetchPage, props.bugReducer, props.name])
-
-
-
     return (
         <Grid>
             {seeTeam ? '' : 
@@ -218,7 +212,7 @@ const Bugs = ({ fetchPage, createBug, updateBug, deleteBug, ...props }) => {
             }
             <Box display="flex" justifyContent="right" alignItems="flex-start" mr="15px" height= "100px">
                 <Button color="secondary" variant="contained" onClick={()=>handleTeam()} >
-                    MANAGE TEAM
+                    {!seeTeam ? "MANAGE TEAM" : "MANAGE BUGS"}
                 </Button>
             </Box>
         </Grid>
