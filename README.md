@@ -23,6 +23,9 @@ All user data, can be modified, deleted, or created by admins or the user themse
 ## Page for adding admins to the database
 ![image](https://user-images.githubusercontent.com/75647839/218432896-1cc31cbf-fb92-4187-a150-f23c522fecd1.png)
 
+## Page for adding events and deadlines
+![AWEFARHAWEFAW](https://user-images.githubusercontent.com/75647839/227754029-05003b5b-fc03-4f5b-ae1f-b92913047a12.PNG)
+
 # For Server Portion
 
 # Getting Started with Express
