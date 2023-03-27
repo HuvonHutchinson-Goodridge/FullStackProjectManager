@@ -7,19 +7,43 @@ import { fetchPage } from "./../store/actions"
 //Material UI
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
-import { Box, Grid, Typography } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import { Box,  Typography } from '@mui/material';
 import { useTheme } from "@mui/material"
 
 //React
-import { useEffect } from 'react'
 import { connect } from "react-redux"
+import FormattedDataGrid from "../components/utils/FormattedDataGrid";
 
 //NEED TO IMPLEMENT DELETE USER FROM DATABASE
 
 const Team = ({fetchPage, ...props}) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
+    const classes = {
+        height: "75vh", width: '100%', margin : "40px 0 0 0", padding: "15px", "& .MuiDataGrid-root": {
+            border: "none",
+        },
+        "& .MuiDataGrid-cell": {
+            borderBottom: 'none'
+        },
+        "& .name-column--cell": {
+            color: colors.greenAccent[300]
+        },
+        "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: colors.blueAccent[700],
+            borderBottom: "none"
+        },
+        "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: colors.primary[400]
+        },
+        "& .MuiDataGrid-footerContainer": {
+            borderTop: "none",
+            backgroundColor: colors.blueAccent[700]
+        }
+
+    }
+
     const columns = [
         { field: '_id', headerName: 'ID', width: 180},
         {
@@ -78,47 +102,10 @@ const Team = ({fetchPage, ...props}) => {
                 `${params.row.firstName || ''} ${params.row.lastName || ''}`,
         },
     ];
-
-    useEffect(() => {
-        fetchPage("TEAM", "HERE IS YOUR TEAM");
-    }, [fetchPage])
-
     
     return (
-        <Grid item m="40px 0 0 0" p="15px" sx={{
-            height: "75vh", width: '100%', "& .MuiDataGrid-root": {
-                border: "none",
-            },
-            "& .MuiDataGrid-cell": {
-                 borderBottom: 'none'
-            },
-            "& .name-column--cell": {
-                color: colors.greenAccent[300]
-            },
-            "& .MuiDataGrid-columnHeaders": {
-                backgroundColor: colors.blueAccent[700],
-                borderBottom: "none"
-            },
-            "& .MuiDataGrid-virtualScroller": {
-                backgroundColor: colors.primary[400]
-            },
-            "& .MuiDataGrid-footerContainer": {
-                borderTop: "none",
-                backgroundColor: colors.blueAccent[700]
-            }
+        <FormattedDataGrid header="TEAM" subHeader="HERE IS YOUR TEAM" styles={classes} rows={props.users} columns={columns}/>
 
-        }
-        } >
-
-            <DataGrid
-                getRowId={(row) => row._id}
-                rows={props.users}
-                columns={columns}
-                disableSelectionOnClick
-                experimentalFeatures={{ newEditingApi: true }}
-                sx={{ backgroundColor: colors.primary[400] }}
-            />
-        </Grid>
     );
 }
 
