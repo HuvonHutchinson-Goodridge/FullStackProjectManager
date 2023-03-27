@@ -87,7 +87,7 @@ const Bugs = ({ fetchPage, createBug, updateBug, deleteBug, ...props }) => {
     }
 
     useEffect(() => {
-        fetchPage('Bugs', `Bugs for ${props.name}`)
+        fetchPage('Bugs', `Bugs for ${props.name}`.toUpperCase())
     }, [fetchPage, props.bugReducer, props.name])
 
 
@@ -112,7 +112,7 @@ const Bugs = ({ fetchPage, createBug, updateBug, deleteBug, ...props }) => {
                                 onChange={handleChange}
                                 onBlur={handleBlur} />
                             <Button color="secondary" variant="contained" type="submit">
-                                Add Bug
+                                ADD BUG
                             </Button>
                         </Grid>
                     </Form>)}
@@ -151,7 +151,7 @@ const Bugs = ({ fetchPage, createBug, updateBug, deleteBug, ...props }) => {
             </Grid>
             <Box display="flex" justifyContent="right" alignItems="flex-start" mr="15px" height= "100px">
                 <Button color="secondary" variant="contained" >
-                    Manage Team
+                    MANAGE TEAM
                 </Button>
             </Box>
         </Grid>
