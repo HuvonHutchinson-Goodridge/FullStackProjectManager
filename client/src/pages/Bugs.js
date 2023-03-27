@@ -1,11 +1,10 @@
 //Material UI
 import { Box, Grid, Button, useTheme, Typography } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 
 //React
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { connect } from 'react-redux'
 
 //Formik
