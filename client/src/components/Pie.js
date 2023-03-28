@@ -106,16 +106,16 @@ const Pie = ({bugsPending, bugsResolved}) => {
 }
 
 const mapStateToProps = ({ projectReducer }) => {
-    
-    const bugsData = projectReducer.reduce((acc, cur, index, array) => {
-        acc[0] += cur.bugsResolved;
-        acc[1] += cur.bugsPending;
-        return acc
-    }, [0,0])
 
-    let bugsPending = bugsData[1]
+    const bugsData = [0,0]
+    for (const value of Object.values(projectReducer)) {
+        bugsData[0] += value.bugsResolved;
+        bugsData[1] += value.bugsPending
+    }
+
     let bugsResolved = bugsData[0]
-
+    let bugsPending = bugsData[1]
+  
     return { bugsResolved, bugsPending }
 }
 
