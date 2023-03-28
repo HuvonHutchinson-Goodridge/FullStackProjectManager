@@ -117,17 +117,22 @@ export const fetchPage = (title, subtitle) => {
 export const loadData = () => {
     return async function (dispatch) {
         try {
-            const projects = await API.getAllProjects();
-            const users = await API.getAllUsers();
-            const bugsOnProject = projects.data.data.map(async (project) => {
-                return await API.getAllProjects(project._id, 'bugs')
-            })
+            const allProjects = await API.getAllProjects();
 
-            const bugs = await Promise.all(bugsOnProject).then(values => {
-                const bugData = values.map((value) => {
-                    return value.data.data
-                })
-                return bugData;
+            const bugs = {}
+            const projects = {}
+
+            allProjects.data.data.forEach((cur) => {
+                const project = cur["_id"]
+                bugs[project] = {}
+                projects[project] = cur;
+            })
+            
+            const users = await API.getAllUsers();
+            const allBugs = await API.getAllBugs('bugs')
+            
+            allBugs.data.data.forEach((cur, i, arr) => {
+                bugs[cur.project][cur._id] = cur;
             })
           
             dispatch({
@@ -136,7 +141,7 @@ export const loadData = () => {
             })
             dispatch({
                 type: "PROJECTS",
-                payload: projects.data.data
+                payload: projects
             })
             dispatch({
                 type: "USERS",
