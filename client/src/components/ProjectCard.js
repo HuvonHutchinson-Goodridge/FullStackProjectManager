@@ -46,8 +46,8 @@ const ProjectCard = ({selectProject, ...props}) => {
                 <CardHeader
                     title={props.name}
                     sx={{
-                        display: "flex"
-                        
+                        display: "flex",
+                        whiteSpace: "nowrap"
                     }}
                 />
                 <CardMedia
@@ -57,7 +57,10 @@ const ProjectCard = ({selectProject, ...props}) => {
                     image={require(`../assets/projectImages/${props.image}`)}
                     alt="Project Image"
                 />
-                <CardContent>
+                <CardContent sx={{
+                    display: "flex",
+                    whiteSpace: "nowrap"
+                }}>
                     <Typography variant="h6" color="text.secondary">
                         {props.name}
                     </Typography>
