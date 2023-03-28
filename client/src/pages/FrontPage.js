@@ -20,15 +20,19 @@ const FrontPage = ({ fetchPage, projects }) => {
     }, [fetchPage])
 
     const createBox = (projects) => {
-        const projectBox = projects.map(({ name, bugsResolved, numOfBugs }) => {
-            return (
-                <Grid item md={3} key={name} container m="10px 0 0 0" alignItems="center" justifyContent="center">
-                    <StatBox title={name} subtitle="Project" progress={numOfBugs === 0 ? 0 : Math.trunc(bugsResolved / numOfBugs * 100)} icon={
-                        <FolderSharedOutlinedIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />
-                    } />
+
+        const projectBox = new Array();
+
+        for (const value of Object.values(projects)) {
+            const { name, numOfBugs, bugsResolved } = value;
+            projectBox.push(
+            <Grid item md={3} key={name} container m="10px 0 0 0" alignItems="center" justifyContent="center">
+                <StatBox title={name} subtitle="Project" progress={numOfBugs === 0 ? 0 : Math.trunc(bugsResolved / numOfBugs * 100)} icon={
+                    <FolderSharedOutlinedIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />
+                } />
                 </Grid>
-            )
-        })
+                )
+        }
         return projectBox
     }
     return (
