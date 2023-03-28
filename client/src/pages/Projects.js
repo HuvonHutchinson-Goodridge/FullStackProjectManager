@@ -17,21 +17,21 @@ const Projects = ({fetchPage, ...props }) => {
         fetchPage('Projects', "HERE ARE YOUR PROJECTS".toUpperCase())
     }, [fetchPage])
 
-    const projectArray = props.projects.map((project) => {
-        return <ProjectCard
+    const projectArray = new Array()
+
+    for (const project of Object.values(props.projects)) {
+        projectArray.push(<ProjectCard
             project={project}
             key={project.name}
             name={project.name}
             description={project.description}
-            image={project.image} />
-    })
+            image={project.image} />)
+    }
 
     return (
-
         <Grid item container overflow="auto" nowrap spacing={1} md={12} ml="5px">
             {projectArray}
         </Grid>
-
     )
 }
 
