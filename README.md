@@ -16,6 +16,7 @@ All user data, can be modified, deleted, or created by admins or the user themse
 
 ## Displays all current projects
 ![image](https://user-images.githubusercontent.com/75647839/218280762-3b2e902b-f859-4b6b-ac80-dcca8f29c161.png)
+![image](https://user-images.githubusercontent.com/75647839/227845632-ad08bae8-1f16-4d88-a042-842db0bd5603.png)
 
 ## Displays all bugs in a specific project
 ![image](https://user-images.githubusercontent.com/75647839/218280981-cba4f118-e72b-4d26-ac9b-edab3160c25d.png)
